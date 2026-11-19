@@ -26,7 +26,7 @@ $ErrorActionPreference = "Stop"
 $src = $PSScriptRoot
 
 if ([string]::IsNullOrWhiteSpace($OutDir)) {
-    $OutDir = Join-Path (Split-Path $src -Parent) "SLADE3-CN-release"
+    $OutDir = Join-Path (Split-Path $src -Parent) "SLADE3-CN-3.3.1-win64"
 }
 
 # --- Visual Studio ----------------------------------------------------------

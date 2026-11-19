@@ -163,7 +163,7 @@ powershell -ExecutionPolicy Bypass -File build-windows.ps1
 1. 定位 Visual Studio 并进入开发者环境；
 2. 使用 CMake 预设 `win-x64-release` 配置工程（vcpkg manifest 模式会自动安装依赖）；
 3. 编译 `slade` 目标并打包 `slade.pk3`；
-4. 把 `SLADE.exe`、`slade.pk3`、`lang/` 复制到 `..\SLADE3-CN-release\`。
+4. 把 `SLADE.exe`、`slade.pk3`、`lang/` 复制到 `..\SLADE3-CN-3.3.1-win64\`。
 
 也可以手动构建：
 
@@ -230,7 +230,7 @@ Open	打开
 ## 7. 已知限制
 
 1. **仓库本身不包含二进制文件**：本仓库是源码；编译好的 `SLADE.exe`、`slade.pk3` 与
-   `lang/` 放在配套的 `SLADE3-CN-release` 发布目录中，可直接运行。
+   `lang/` 放在配套的 `SLADE3-CN-3.3.1-win64` 发布目录中，可直接运行。
 2. 少量技术性缩写、占位符与纯符号刻意不翻译，例如 `3D`、`ACS`、`ASCII`、`SLADE`、
    `X`/`Y`、`K1:`、`out of XX` 等。
 3. 运行时动态拼接的字符串（`fmt::format` / `WX_FMT` 生成的部分，如
