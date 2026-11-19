@@ -1,0 +1,144 @@
+#pragma once
+
+#include "EntryState.h"
+#include "Utility/PropertyList.h"
+
+namespace slade
+{
+class EntryType;
+struct ArchiveFormatInfo;
+
+enum class EntryEncryption
+{
+	None = 0,
+	Jaguar,
+	Blood,
+	SCRLE0,
+	TXB,
+};
+
+class ArchiveEntry : public std::enable_shared_from_this<ArchiveEntry>
+{
+	friend class ArchiveDir;
+	friend class Archive;
+	friend class ArchiveFormatHandler;
+
+public:
+	// Constructor/Destructor
+	ArchiveEntry(string_view name = "", u32 size = 0, const void* data = nullptr);
+	ArchiveEntry(const ArchiveEntry& copy);
+	~ArchiveEntry() = default;
+
+	// Accessors
+	const string&            name() const { return name_; }
+	string_view              nameNoExt() const;
+	string_view              ext() const;
+	const string&            upperName() const { return upper_name_; }
+	string_view              upperNameNoExt() const;
+	string_view              upperExt() const;
+	u32                      size() const { return data_.size(); }
+	const MemChunk&          data() const { return data_; }
+	const uint8_t*           rawData() const { return data_.data(); }
+	ArchiveDir*              parentDir() const { return parent_.lock().get(); }
+	Archive*                 parent() const;
+	Archive*                 topParent() const;
+	string                   path(bool name = false) const;
+	EntryType*               type() const { return type_; }
+	PropertyList&            exProps() { return ex_props_; }
+	const PropertyList&      exProps() const { return ex_props_; }
+	Property&                exProp(const string& key) { return ex_props_[key]; }
+	template<typename T> T   exProp(const string& key);
+	EntryState               state() const { return state_; }
+	bool                     isLocked() const { return locked_; }
+	EntryEncryption          encryption() const { return encrypted_; }
+	ArchiveEntry*            nextEntry();
+	ArchiveEntry*            prevEntry();
+	shared_ptr<ArchiveEntry> getShared() const;
+	int                      index();
+
+	// Modifiers (won't change entry state, except setState of course :P)
+	void setName(string_view name);
+	void setType(EntryType* type, int r = 0)
+	{
+		type_        = type;
+		reliability_ = r;
+	}
+	void setState(EntryState state, bool silent = false);
+	void setEncryption(EntryEncryption enc) { encrypted_ = enc; }
+	void lock();
+	void unlock();
+	void lockState() { state_locked_ = true; }
+	void unlockState() { state_locked_ = false; }
+	void formatName(const ArchiveFormatInfo& format);
+
+	// Entry modification (will change entry state)
+	bool rename(string_view new_name);
+	bool resize(u32 new_size, bool preserve_data);
+
+	// Data modification
+	bool clearData(bool silent = false);
+
+	// Data import
+	bool importMem(const void* data, u32 size);
+	bool importMemChunk(const MemChunk& mc, u32 offset = 0, u32 size = 0);
+	bool importFile(string_view filename, u32 offset = 0, u32 size = 0);
+	bool importFileStream(wxFile& file, u32 len = 0);
+	bool importEntry(const ArchiveEntry* entry);
+
+	// Data export
+	bool exportFile(string_view filename) const;
+
+	// Data access
+	bool write(const void* data, u32 size);
+	bool read(void* buf, u32 size) const;
+	bool seek(u32 offset, u32 start) const { return data_.seek(offset, start); }
+	u32  currentPos() const { return data_.currentPos(); }
+
+	// Data on disk
+	int  sizeOnDisk() const { return ex_props_.getOr("SizeOnDisk", -1); }
+	void setSizeOnDisk(int size) { ex_props_["SizeOnDisk"] = size; }
+	void setSizeOnDisk() { ex_props_["SizeOnDisk"] = static_cast<int>(data_.size()); }
+	int  offsetOnDisk() const { return ex_props_.getOr("OffsetOnDisk", -1); }
+	void setOffsetOnDisk(int offset) { ex_props_["OffsetOnDisk"] = offset; }
+
+	// Misc
+	string        sizeString() const;
+	string        typeString() const;
+	void          stateChanged();
+	void          dataChanged();
+	void          setExtensionByType();
+	int           typeReliability() const;
+	bool          isInNamespace(string_view ns);
+	ArchiveEntry* relativeEntry(string_view path, bool allow_absolute_path = true) const;
+	bool          isFolderType() const;
+	bool          isArchive() const;
+
+private:
+	// Entry Info
+	string               name_;
+	string               upper_name_;
+	MemChunk             data_;
+	EntryType*           type_ = nullptr;
+	weak_ptr<ArchiveDir> parent_;
+	PropertyList         ex_props_;
+
+	// Entry status
+	EntryState      state_        = EntryState::New;
+	bool            state_locked_ = false; // If true the entry state cannot be changed (used for initial loading)
+	bool            locked_       = false; // If true the entry data+info cannot be changed
+	EntryEncryption encrypted_    = EntryEncryption::None; // Is there some encrypting on the archive?
+
+	// Misc stuff
+	int    reliability_ = 0; // The reliability of the entry's identification
+	size_t index_guess_ = 0; // for speed
+};
+
+template<typename T> T ArchiveEntry::exProp(const string& key)
+{
+	if (auto val = std::get_if<T>(&ex_props_[key]))
+		return *val;
+
+	return T{};
+}
+
+} // namespace slade

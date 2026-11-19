@@ -1,0 +1,81 @@
+#pragma once
+
+#include <thread>
+
+namespace slade
+{
+class Archive;
+class ArchiveManager;
+class PaletteManager;
+class Clipboard;
+class ResourceManager;
+
+namespace app
+{
+	bool             isInitialised();
+	PaletteManager*  paletteManager();
+	long             runTimer();
+	bool             isExiting();
+	ArchiveManager&  archiveManager();
+	Clipboard&       clipboard();
+	ResourceManager& resources();
+	Archive*         programResource();
+
+	bool init(const vector<string>& args);
+	void saveConfiguration();
+	void exit(bool save_config);
+	void handleException();
+
+	// Version
+	struct Version
+	{
+		unsigned long major    = 0;
+		unsigned long minor    = 0;
+		unsigned long revision = 0;
+		unsigned long beta     = 0;
+
+		unsigned long sub_revision = 0; // Some older versions of SLADE had a 4th version number
+
+		Version(unsigned long major = 0, unsigned long minor = 0, unsigned long revision = 0, unsigned long beta = 0) :
+			major{ major },
+			minor{ minor },
+			revision{ revision },
+			beta{ beta }
+		{
+		}
+		Version(const string& version);
+
+		int    cmp(const Version& rhs) const;
+		string toString(bool display = true) const;
+	};
+	const Version& version();
+
+	// Path related stuff
+	enum class Dir
+	{
+		User,
+		Data,
+		Executable,
+		Resources,
+		Temp,
+		OldUser // For migrating 3.2.x config files to 3.3.0 (the user config directory is changed on linux)
+	};
+	string path(string_view filename, Dir dir);
+
+	// Platform and build options
+	enum Platform
+	{
+		Windows,
+		Linux,
+		MacOS,
+		Unknown
+	};
+	Platform      platform();
+	const string& iconFile();
+	bool          isWin64Build();
+	string        osDescription();
+
+	std::thread::id mainThreadId();
+	bool            isDarkTheme();
+} // namespace app
+} // namespace slade

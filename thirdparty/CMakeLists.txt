@@ -1,0 +1,84 @@
+# Use system packages if available
+find_package(ZLIB REQUIRED)
+find_package(BZip2 REQUIRED)
+
+# Set in parent scope
+set(ZLIB_LIBRARY ${ZLIB_LIBRARY} PARENT_SCOPE)
+set(BZIP2_LIBRARIES ${BZIP2_LIBRARIES} PARENT_SCOPE)
+
+# Roll the rest up into a big ball and compile it by itself
+set(EXTERNAL_SOURCES
+)
+file(GLOB_RECURSE EXTERNAL_SOURCES
+	lzma/C/LzmaDec.c
+	glad/src/*.c
+	libdrawtext/*.c
+	${SLADE_HEADERS}
+	xxhash/*.c
+)
+
+# fmt
+option(USE_SYSTEM_FMT "Use system fmt library" OFF)
+option(FMT_INSTALL OFF)
+if (USE_SYSTEM_FMT)
+	find_package(fmt REQUIRED)
+else ()
+	add_subdirectory(fmt)
+	#target_include_directories(fmt INTERFACE ${CMAKE_CURRENT_LIST_DIR}/fmt/include)
+endif ()
+
+# Required for libdrawtext or we get multiple definition linker errors
+if (NOT MSVC)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon")
+endif ()
+
+# SQLiteCpp
+# Static analysis targets aren't needed and fail with a broken/missing cppcheck install
+set(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "" FORCE)
+set(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
+add_subdirectory(sqlitecpp)
+
+# JSON (nlohmann)
+include(FetchContent)
+FetchContent_Declare(json
+	URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
+	DOWNLOAD_EXTRACT_TIMESTAMP true
+)
+FetchContent_MakeAvailable(json)
+
+# Lua (via marovira/lua which provides the lua::lua target)
+if (NOT NO_LUA)
+	FetchContent_Declare(lua
+		GIT_REPOSITORY https://github.com/marovira/lua.git
+		GIT_TAG 5.5.1
+	)
+	FetchContent_MakeAvailable(lua)
+endif ()
+
+# md4c (for parsing Markdown to HTML)
+set(BUILD_MD2HTML_EXECUTABLE OFF CACHE BOOL "" FORCE)
+set(BUILD_SHARED_LIBS_SAVED ${BUILD_SHARED_LIBS})
+set(BUILD_SHARED_LIBS OFF)
+FetchContent_Declare(md4c
+	URL https://github.com/mity/md4c/archive/refs/tags/v0.6.0.tar.gz
+	DOWNLOAD_EXTRACT_TIMESTAMP true
+)
+FetchContent_MakeAvailable(md4c)
+set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS_SAVED})
+target_include_directories(md4c INTERFACE $<BUILD_INTERFACE:${md4c_SOURCE_DIR}/src>)
+target_include_directories(md4c-html INTERFACE $<BUILD_INTERFACE:${md4c_SOURCE_DIR}/src>)
+
+add_library(external STATIC ${EXTERNAL_SOURCES})
+target_link_libraries(external
+	${ZLIB_LIBRARY}
+	fmt::fmt
+	${CMAKE_DL_LIBS}
+	SQLiteCpp
+	sqlite3
+	nlohmann_json::nlohmann_json
+	md4c-html
+)
+if (NOT NO_LUA)
+	target_link_libraries(external lua::lua)
+endif ()
+set(EXTERNAL_LIBRARIES external PARENT_SCOPE)

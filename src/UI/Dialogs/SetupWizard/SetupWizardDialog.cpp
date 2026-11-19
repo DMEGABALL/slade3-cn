@@ -1,0 +1,204 @@
+
+// -----------------------------------------------------------------------------
+// SLADE - It's a Doom Editor
+// Copyright(C) 2008 - 2026 Simon Judd
+//
+// Email:       sirjuddington@gmail.com
+// Web:         http://slade.mancubus.net
+// Filename:    SetupWizardDialog.cpp
+// Description: Setup wizard dialog that is shown on the first run to set up
+//              important editing preferences and settings
+//
+// This program is free software; you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation; either version 2 of the License, or (at your option)
+// any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+// more details.
+//
+// You should have received a copy of the GNU General Public License along with
+// this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301, USA.
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+//
+// Includes
+//
+// -----------------------------------------------------------------------------
+#include "Main.h"
+#include "SetupWizardDialog.h"
+#include "BaseResourceWizardPage.h"
+#include "NodeBuildersWizardPage.h"
+#include "UI/Layout.h"
+#include "UI/WxUtils.h"
+
+using namespace slade;
+
+
+// -----------------------------------------------------------------------------
+//
+// SetupWizardDialog Class Functions
+//
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+// SetupWizardDialog class constructor
+// -----------------------------------------------------------------------------
+SetupWizardDialog::SetupWizardDialog(wxWindow* parent) :
+	wxDialog(
+		parent,
+		-1,
+		i18n::tr(wxS("First Time SLADE Setup")),
+		wxDefaultPosition,
+		wxDefaultSize,
+		wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER)
+{
+	// Create pages
+	// pages_.push_back(new TempFolderWizardPage(this));
+	pages_.push_back(new BaseResourceWizardPage(this));
+	pages_.push_back(new NodeBuildersWizardPage(this));
+
+	// Hide all pages
+	for (auto& page : pages_)
+		page->Show(false);
+
+	// Init layout
+	setupLayout();
+
+	// Set icon
+	wxutil::setWindowIcon(this, "logo");
+
+	// Setup layout
+	SetInitialSize(FromDIP(wxSize(600, 500)));
+	wxTopLevelWindowBase::Layout();
+	wxWindowBase::Fit();
+	wxTopLevelWindowBase::SetMinSize(GetBestSize());
+	CenterOnParent();
+
+	showPage(0);
+
+	// Bind events
+	btn_next_->Bind(wxEVT_BUTTON, &SetupWizardDialog::onBtnNext, this);
+	btn_prev_->Bind(wxEVT_BUTTON, &SetupWizardDialog::onBtnPrev, this);
+}
+
+// -----------------------------------------------------------------------------
+// Sets up the dialog layout
+// -----------------------------------------------------------------------------
+void SetupWizardDialog::setupLayout()
+{
+	auto lh = ui::LayoutHelper(this);
+
+	// Setup main sizer
+	auto sizer = new wxBoxSizer(wxVERTICAL);
+	SetSizer(sizer);
+
+	// Page title
+	label_page_title_ = new wxStaticText(
+		this, -1, i18n::tr(wxString::FromUTF8(pages_[0]->title())), wxDefaultPosition, wxDefaultSize, wxST_NO_AUTORESIZE);
+	label_page_title_->SetFont(label_page_title_->GetFont().MakeLarger().MakeBold());
+	sizer->Add(label_page_title_, lh.sfWithXLargeBorder().Expand());
+
+	// Page description
+	label_page_description_ = new wxStaticText(this, -1, wxEmptyString);
+	sizer->Add(label_page_description_, lh.sfWithXLargeBorder(0, wxLEFT | wxRIGHT | wxBOTTOM).Expand());
+
+	// Main page area
+	sizer->Add(pages_[0], lh.sfWithXLargeBorder(1, wxLEFT | wxRIGHT | wxBOTTOM).Expand());
+
+	// Bottom buttons
+	auto hbox = new wxBoxSizer(wxHORIZONTAL);
+	hbox->AddStretchSpacer();
+	sizer->Add(hbox, lh.sfWithXLargeBorder().Expand());
+
+	// Previous button
+	btn_prev_ = new wxButton(this, -1, slade::i18n::tr(wxS("Previous")));
+	hbox->Add(btn_prev_, lh.sfWithBorder(0, wxRIGHT).Expand());
+
+	// Next button
+	btn_next_ = new wxButton(this, -1, slade::i18n::tr(wxS("Next")));
+	hbox->Add(btn_next_, wxSizerFlags().Expand());
+
+	btn_prev_->Enable(false);
+}
+
+// -----------------------------------------------------------------------------
+// Shows the wizard page at [index]
+// -----------------------------------------------------------------------------
+void SetupWizardDialog::showPage(unsigned index)
+{
+	// Check index
+	if (index >= pages_.size())
+		return;
+
+	// Swap pages
+	pages_[current_page_]->Show(false);
+	GetSizer()->Replace(pages_[current_page_], pages_[index]);
+	pages_[index]->Show(true);
+	current_page_ = index;
+
+	// Check for last page
+	if (index == pages_.size() - 1)
+		btn_next_->SetLabel(slade::i18n::tr(wxS("Finish")));
+	else
+		btn_next_->SetLabel(slade::i18n::tr(wxS("Next")));
+
+	// Check for first page
+	if (index == 0)
+		btn_prev_->Enable(false);
+	else
+		btn_prev_->Enable(true);
+
+	// Update title
+	label_page_title_->SetLabel(i18n::tr(wxString::FromUTF8(pages_[index]->title())));
+
+	// Update description
+	label_page_description_->SetLabel(i18n::tr(wxString::FromUTF8(pages_[index]->description())));
+	label_page_description_->Wrap(label_page_title_->GetSize().x);
+
+	Layout();
+	Update();
+	Refresh();
+}
+
+
+// -----------------------------------------------------------------------------
+//
+// SetupWizardDialog Class Events
+//
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+// Called when the 'Next' button is clicked
+// -----------------------------------------------------------------------------
+void SetupWizardDialog::onBtnNext(wxCommandEvent& e)
+{
+	if (pages_[current_page_]->canGoNext())
+	{
+		pages_[current_page_]->applyChanges();
+
+		// Close if last page
+		if (current_page_ == pages_.size() - 1)
+		{
+			EndModal(wxID_OK);
+			return;
+		}
+
+		showPage(current_page_ + 1);
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Called when the 'Previous' button is clicked
+// -----------------------------------------------------------------------------
+void SetupWizardDialog::onBtnPrev(wxCommandEvent& e)
+{
+	showPage(current_page_ - 1);
+}

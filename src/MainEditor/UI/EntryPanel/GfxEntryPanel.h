@@ -1,0 +1,85 @@
+#pragma once
+
+#include "EntryPanel.h"
+
+namespace slade
+{
+class GfxCanvasBase;
+class ColourBox;
+class SImage;
+class Translation;
+enum class GfxView;
+
+namespace ui
+{
+	class ZoomControl;
+}
+
+class GfxEntryPanel : public EntryPanel
+{
+public:
+	GfxEntryPanel(wxWindow* parent);
+	~GfxEntryPanel() override = default;
+
+	Translation& prevTranslation() const { return *prev_translation_; }
+
+	void    setupToolbars();
+	void    fillBrushMenu(wxMenu* bm) const;
+	void    updateImagePalette() const;
+	GfxView detectOffsetType(ArchiveEntry* entry) const;
+	void    applyViewType(ArchiveEntry* entry) const;
+	void    refresh(ArchiveEntry* entry = nullptr);
+	void    refreshPanel() override;
+	string  statusString() override;
+	bool    extractAll() const;
+
+	// SAction handler
+	bool handleEntryPanelAction(string_view id) override;
+	bool fillCustomMenu(wxMenu* custom) override;
+
+	SImage* image() const;
+
+protected:
+	bool loadEntry(ArchiveEntry* entry) override;
+	bool loadEntry(ArchiveEntry* entry, int index);
+	bool writeEntry(ArchiveEntry& entry) override;
+
+	// Toolbar
+	void toolbarButtonClick(const string& action_id) override;
+
+private:
+	bool                    alph_                = false;
+	bool                    trns_                = false;
+	bool                    image_data_modified_ = false;
+	int                     cur_index_           = 0;
+	bool                    editing_             = false;
+	unique_ptr<Translation> prev_translation_;
+	unique_ptr<Translation> edit_translation_;
+
+	GfxCanvasBase*   gfx_canvas_         = nullptr;
+	ColourBox*       cb_colour_          = nullptr;
+	wxChoice*        choice_offset_type_ = nullptr;
+	wxSpinCtrl*      spin_xoffset_       = nullptr;
+	wxSpinCtrl*      spin_yoffset_       = nullptr;
+	wxButton*        btn_auto_offset_    = nullptr;
+	wxSpinCtrl*      spin_curimg_        = nullptr;
+	wxStaticText*    text_imgnum_        = nullptr;
+	wxStaticText*    text_imgoutof_      = nullptr;
+	wxMenu*          menu_brushes_       = nullptr;
+	ui::ZoomControl* zc_zoom_            = nullptr;
+
+	// Signal connections
+	sigslot::scoped_connection sc_palette_changed_;
+
+	// Events
+	void onPaintColourChanged(wxEvent& e);
+	void onXOffsetChanged(wxCommandEvent& e);
+	void onYOffsetChanged(wxCommandEvent& e);
+	void onOffsetTypeChanged(wxCommandEvent& e);
+	void onGfxOffsetChanged(wxEvent& e);
+	void onGfxPixelsChanged(wxEvent& e);
+	void onCurImgChanged(wxCommandEvent& e);
+	void onBtnAutoOffset(wxCommandEvent& e);
+	void onColourPicked(wxEvent& e);
+};
+} // namespace slade

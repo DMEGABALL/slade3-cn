@@ -1,0 +1,62 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    width="16px"
+    height="16px"
+    style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg)"
+    viewBox="0 0 24 24"
+    transform="rotate(360)">
+    <ellipse
+        cx="12"
+        cy="12"
+        rx="11"
+        ry="11"
+        fill="#CC0000"
+		stroke="#330000"
+		stroke-width="1.5"
+    />
+	<!-- Arrow -->
+	<g transform="translate(14, 14)">
+		<line x1="0" y1="0" x2="6" y2="6"
+			stroke="#330000"
+			stroke-width="4"
+			stroke-linecap="round"
+		/>
+		<line x1="6" y1="6" x2="6" y2="2"
+			stroke="#330000"
+			stroke-width="4"
+			stroke-linecap="round"
+		/>
+		<line x1="6" y1="6" x2="2" y2="6"
+			stroke="#330000"
+			stroke-width="4"
+			stroke-linecap="round"
+		/>
+		<line x1="0" y1="0" x2="6" y2="6"
+			stroke="#FFFFFF"
+			stroke-width="1.5"
+			stroke-linecap="round"
+		/>
+		<line x1="6" y1="6" x2="6" y2="2"
+			stroke="#FFFFFF"
+			stroke-width="1.5"
+			stroke-linecap="round"
+		/>
+		<line x1="6" y1="6" x2="2" y2="6"
+			stroke="#FFFFFF"
+			stroke-width="1.5"
+			stroke-linecap="round"
+		/>
+	</g>
+    <!-- <g transform="translate(6, 22)">
+        <g transform="scale(0.3, -0.3)">
+            <path
+                fill="#FFFFFF"
+                fill-opacity="1"
+				stroke="#330000"
+				stroke-width="3"
+                d="M32.517 48.107L25.445 27H2.462L46.66 2.196z"
+            />
+        </g>
+    </g> -->
+</svg>

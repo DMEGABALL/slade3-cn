@@ -1,0 +1,1568 @@
+# =============================================================================
+# SLADE 简体中文语言文件 / SLADE Simplified Chinese language file
+# -----------------------------------------------------------------------------
+# 编码：UTF-8（不带 BOM）
+# 格式：每行 "<英文原文><TAB><中文翻译>[<TAB>zh|both|en]"
+#   - 以 # 开头的行是注释
+#   - 第三列可选，用于覆盖该条目的显示模式（zh=只显示中文，both=中英双语，en=仅英文）
+#   - \n、\t、\\ 会被还原为换行、制表符、反斜杠
+# 修改后直接覆盖 SLADE 目录下的 lang/zh_CN.txt 即可生效，无需重新编译。
+# =============================================================================
+@mode both
+
+&About	关于
+&Archive Manager	归档管理器
+&Build Archive	构建归档
+&Close	关闭
+&Console	控制台
+&Delete Script	删除脚本
+&Import Files	导入文件
+&Item Properties	物件属性
+&Map Editor	地图编辑器
+&Open	打开
+&Preferences...	首选项...
+&Rename Map	重命名地图
+&Rename Script	重命名脚本
+&Run	运行
+&SLADE Homepage	SLADE 主页
+&Save	保存
+&Save Map Changes	保存地图更改
+&Scripts	脚本
+&Texture Editor	纹理编辑器
+&Undo History	撤销历史
+(Fix1)	修正 1
+(Fix2)	修正 2
+...Really?	真的吗？
+1:1 Size	1:1 尺寸
+3d Mode	3D 模式
+Absolute	绝对
+Action Special	动作特殊
+Add	添加
+Add Archive	添加归档
+Add External Editor	添加外部编辑器
+Add Key	添加按键
+Add Patch	添加拼块
+Add Patch from File	从文件添加拼块
+Add Row	添加行
+Add a gradient to the palette	向调色板添加渐变
+Add a new patch to the list	向列表添加新的拼块
+Add a new row (after the currently selected row	在当前选中行之后添加新行
+Add a patch to the texture	向纹理添加拼块
+Add one or more new patch(es) from image file(s)	从图像文件添加一个或多个新拼块
+Add selected gfx entries to PNAMES	将选中的图形条目添加到 PNAMES
+Add the current palette to the custom palettes list	将当前调色板添加到自定义调色板列表
+Add to Custom Palettes	添加到自定义调色板
+Add to Patch Table	添加到拼块表
+Add to TEXTUREx	添加到 TEXTUREx
+Add/Remove alPh chunk to/from the PNG	在 PNG 中添加/移除 alPh 数据块
+Add/Remove tRNS chunk to/from the PNG	在 PNG 中添加/移除 tRNS 数据块
+Additional Credits	附加致谢
+Adjust Colorimetry Settings...	调整色度设置...
+Adjust Offsets?	调整偏移？
+All	全部
+Allow Backslash Expressions	允许反斜杠表达式
+Alternate Damage Mode	交替伤害模式
+Alternating Row Colour	交替行颜色
+Always Show Compiler Output	始终显示编译器输出
+Always use the selected font in the text editor, instead of the style's font below	文本编辑器始终使用所选字体，而不是下方的样式字体	zh
+Amount	数量
+Amount:	数量：
+An error occurred loading the game configuration, see the console log for details	加载游戏配置时出错，详情请查看控制台日志	zh
+An extended recent files list is shown in a tab on the Archive Manager panel.	更完整的最近文件列表可在归档管理器面板的标签页中查看。	zh
+Apply	应用
+Apply Preset	应用预设
+Apply Scale	应用缩放
+Apply Selected Changes	应用选中的更改
+Apply a different colour scheme (open the text editor options)	应用不同的配色方案（打开文本编辑器选项）
+Apply a translation to pixels of the image	对图像像素应用色彩转换
+Apply aspect ratio correction	应用宽高比修正
+Apply the current texture scale	应用当前纹理缩放
+Apply the dark colour scheme	应用深色配色方案
+Apply the light colour scheme	应用浅色配色方案
+Archive Editor	归档编辑器
+Archive maintenance/cleanup tools	归档维护/清理工具
+Archives	归档
+Are you sure you want to exit SLADE?	确定要退出 SLADE 吗？
+Are you sure you want to revert changes made to the entry?	确定要还原对该条目所做的更改吗？
+Args	参数
+Aspect Ratio Correction	宽高比修正
+Automatic Offsets	自动偏移
+Back Side	背面
+Background	背景
+Background Colour:	背景颜色：
+Base Resource Archive	基础资源归档
+Base Resource:	基础资源：
+Be sure to set up a Base Resource Archive. You can switch or manage Base Resource Archives from the 'Base Resource' toolbar.	请务必设置基础资源归档。你可以通过"基础资源"工具栏切换或管理基础资源归档。	zh
+Begin line drawing	开始绘制线段
+Begin shape drawing	开始绘制形状
+Blank	空白
+Bold	粗体
+Bookmarks	书签
+Bottom:	底部：
+Bring Selected Patch(es) Forward	将选中拼块前移
+Bring selected patch(es) toward the front	将选中的拼块向前面移动
+Browse	浏览
+Browse Ceiling Texture	浏览天花板纹理
+Browse Floor Texture	浏览地板纹理
+Browse Map Textures	浏览地图纹理
+Browse Patches	浏览拼块
+Browse Thing Types	浏览物件类型
+Browse...	浏览...
+Brush:	笔刷：
+Build archive from the current directory	从当前目录构建归档
+CIE 94 and CIEDE 2000 Factors	CIE 94 与 CIEDE 2000 系数
+CIE Lab Tristimulus	CIE Lab 三刺激值
+Can't build archive	无法构建归档
+Cancel	取消
+Cannot perform this action because one or more texture related entries is locked. Please close the archive's texture editor if it is open.	无法执行此操作，因为一个或多个纹理相关条目已被锁定。如果该归档的纹理编辑器已打开，请将其关闭。	zh
+Cannot perform this action on an IWAD	无法对 IWAD 执行此操作
+Ceilings	天花板
+Centered	居中
+Change Patch	更换拼块
+Change Special	更换特殊动作
+Change Texture	更换纹理
+Change Type	更换类型
+Change Value...	更改数值...
+Change the currently selected or hilighted line special	更改当前选中或高亮线段的特殊动作
+Change the currently selected or hilighted line texture(s)	更改当前选中或高亮线段的纹理
+Change the currently selected or hilighted sector special(s)	更改当前选中或高亮扇区的特殊效果
+Change the currently selected or hilighted sector texture(s)	更改当前选中或高亮扇区的纹理
+Change the currently selected or hilighted thing type(s)	更改当前选中或高亮物件的类型
+Change the patch to a different image entry	将拼块更换为其他图像条目
+Change the texture of the currently selected wall(s) and/or flat(s)	更改当前选中墙壁和/或平面的纹理	zh
+Change the type of the currently selected thing(s)	更改当前选中物件的类型
+Change the value of the selected cell(s)	更改选中单元格的数值
+Change to 3d editing mode	切换到 3D 编辑模式
+Change to lines editing mode	切换到线段编辑模式
+Change to sectors editing mode	切换到扇区编辑模式
+Change to things editing mode	切换到物件编辑模式
+Change to vertices editing mode	切换到顶点编辑模式
+Change:	更改为：
+Character	字符
+Check	检查
+Check Duplicate &ZDoom Patch Entry Names	检查重复的 ZDoom 拼块条目名称
+Check Duplicate &ZDoom Texture Entry Names	检查重复的 ZDoom 纹理条目名称
+Check Duplicate Entry Content	检查重复的条目内容
+Check Duplicate Entry Names	检查重复的条目名称
+Check Entries Overridden from IWAD	检查被 IWAD 覆盖的条目
+Check ZDoom Texture Entries Overridden from IWAD	检查被 IWAD 覆盖的 ZDoom 纹理条目
+Check for Updates	检查更新
+Check for Updates...	检查更新...
+Check for:	检查项：
+Check online for updates	在线检查更新
+Checks entries of the same name from the base resource archive. Also checks texture definitions. This helps know what your archive overrides.	检查基础资源归档中同名条目，同时检查纹理定义，以了解你的归档覆盖了哪些内容。	zh
+Checks the archive for any duplicate patches and patch table entries in a ZDoom archive.	检查归档中是否存在重复的拼块及拼块表条目（适用于 ZDoom 归档）。	zh
+Checks the archive for any duplicate textures/flats/texture definitions in a ZDoom archive.	检查归档中是否存在重复的纹理/平面/纹理定义（适用于 ZDoom 归档）。	zh
+Checks the archive for any entries sharing the same data	检查归档中是否存在数据相同的条目
+Checks the archive for any entries sharing the same name	检查归档中是否存在名称相同的条目
+Choose which brush shape to use when drawing	选择绘制时使用的笔刷形状
+Circle 5x5	圆形 5x5
+Circle 7x7	圆形 7x7
+Circle 9x9	圆形 9x9
+Clean ZDoom Single Patch Textures	清理 ZDoom 单拼块纹理
+Clean ZDoom Texture Entries.	清理 ZDoom 纹理条目。
+Clean single patch texture entries.	清理仅含单个拼块的纹理条目。
+Clear Filter	清除过滤
+Clear Selection	清除选择
+Clear the current selection, if any	清除当前选择（如果有）
+Click Check to begin	点击"检查"开始
+Close	关闭
+Close All	全部关闭
+Close all open Archives	关闭所有已打开的归档
+Close the current map	关闭当前地图
+Close the current tab	关闭当前标签页
+Close the selected Archive	关闭选中的归档
+Close the tab or window	关闭标签页或窗口
+Code && Language	代码与语言
+Collapse All	全部折叠
+Collapse all expanded directories	折叠所有已展开的目录
+Colorimetry	色度
+Colour	颜色
+Colour Gradient	颜色渐变
+Colour Matching	颜色匹配
+Colour Remap...	颜色重映射...
+Colour by Type	按类型着色
+Colour item background by entry type	按条目类型为项目背景着色
+Colour remap	颜色重映射
+Colour:	颜色：
+Colourise	着色
+Colourise Range	着色范围
+Colourise the graphic	为图形着色
+Colourise the palette	为调色板着色
+Colourise the selected gfx entries	为选中的图形条目着色
+Colours	颜色
+Compile	编译
+Compile ACS	编译 ACS
+Compile ACS (Hexen bytecode)	编译 ACS（Hexen 字节码）
+Compile DECOHack	编译 DECOHack
+Compile any selected DECOHack text entries to DeHackEd	将选中的 DECOHack 文本条目编译为 DeHackEd	zh
+Compile any selected text entries to ACS bytecode	将选中的文本条目编译为 ACS 字节码
+Compile any selected text entries to Hexen-compatible ACS bytecode	将选中的文本条目编译为兼容 Hexen 的 ACS 字节码	zh
+Compile scripts	编译脚本
+Compile to SWITCHES and ANIMATED	编译为 SWITCHES 与 ANIMATED
+Compute CRC-32 Checksum	计算 CRC-32 校验和
+Compute the CRC-32 checksums of the selected entries	计算选中条目的 CRC-32 校验和
+Con&vert Map...	转换地图...
+Config Name:	配置名称：
+Confirm Remove Patch	确认移除拼块
+Continue	继续
+Conversion warning	转换警告
+Convert	转换
+Convert All	全部转换
+Convert Doom Sound to WAV	将 Doom 音效转换为 WAV
+Convert Gfx To...	转换图形为...
+Convert MUS to MIDI	将 MUS 转换为 MIDI
+Convert SWANTBLS entries into SWITCHES and ANIMATED entries	将 SWANTBLS 条目转换为 SWITCHES 与 ANIMATED 条目
+Convert WAV to Doom Sound	将 WAV 转换为 Doom 音效
+Convert any selected Doom Sound format entries to WAV format	将选中的 Doom 音效格式条目转换为 WAV 格式
+Convert any selected MUS format entries to MIDI format	将选中的 MUS 格式条目转换为 MIDI 格式
+Convert any selected SWITCHES and ANIMATED entries to a single ANIMDEFS entry	将选中的 SWITCHES 与 ANIMATED 条目合并为一个 ANIMDEFS 条目	zh
+Convert any selected SWITCHES and ANIMATED entries to a single SWANTBLS entry	将选中的 SWITCHES 与 ANIMATED 条目合并为一个 SWANTBLS 条目	zh
+Convert any selected TEXTUREx entries to ZDoom TEXTURES format	将选中的 TEXTUREx 条目转换为 ZDoom TEXTURES 格式
+Convert any selected WAV format entries to Doom Sound format	将选中的 WAV 格式条目转换为 Doom 音效格式
+Convert the current map to a different format	将当前地图转换为其他格式
+Convert to ANIMDEFS	转换为 ANIMDEFS
+Convert to SWANTBLS	转换为 SWANTBLS
+Convert to TEXTURES	转换为 TEXTURES
+Convert to...	转换为...
+Convert to:	转换为：
+Converted Graphic	已转换图形
+Copy	复制
+Copy Offsets	复制偏移
+Copy Row(s)	复制行
+Copy Stack Trace	复制调用栈
+Copy the currently selected row(s)	复制当前选中的行
+Copy the graphic's offsets to the clipboard	将图形的偏移复制到剪贴板
+Copy the selected entries	复制选中的条目
+Copy the selected texture(s)	复制选中的纹理
+Correct Sectors	修正扇区
+Correct line sector references	修正线段的扇区引用
+Could not find the installation directory of Doom Builder 2, please browse for the DB2 executable	未找到 Doom Builder 2 的安装目录，请浏览选择 DB2 可执行文件	zh
+Crash Information:	崩溃信息：
+Create	创建
+Create GitHub Issue	创建 GitHub 问题
+Create New (Empty)	新建（空）
+Create Sector Here	在此创建扇区
+Create Thing Here	在此创建物件
+Create Vertex Here	在此创建顶点
+Create a copy of this palette at the end	在末尾创建此调色板的副本
+Create a new Archive	新建归档
+Create a new Editor Script	新建编辑器脚本
+Create a new empty directory	新建空目录
+Create a new empty entry	新建空条目
+Create a new standalone map	新建独立地图
+Create a new texture from an existing patch	从现有拼块创建新纹理
+Create a new thing at the cursor position	在光标位置创建新物件
+Create a new vertex at the cursor position	在光标位置创建新顶点
+Create a new, dummy animation	新建虚拟动画
+Create a new, dummy switch	新建虚拟开关
+Create a new, empty texture	新建空纹理
+Create a sector at the cursor position	在光标位置创建扇区
+Create one or more new texture(s) from image file(s)	从图像文件创建一个或多个新纹理
+Create standalone images from the selected texture(s)	从选中的纹理创建独立图像
+Create textures from selected gfx entries and add them to TEXTUREx	从选中的图形条目创建纹理并添加到 TEXTUREx
+Crop	裁剪
+Crop the graphic	裁剪图形
+Crush:	挤压：
+Current Format:	当前格式：
+Current Graphic	当前图形
+Customize	自定义
+Cut	剪切
+Cut Row(s)	剪切行
+Cut the currently selected row(s)	剪切当前选中的行
+Cut the selected entries	剪切选中的条目
+Cut the selected texture(s)	剪切选中的纹理
+Damage:	伤害：
+Dark	深色
+Database Backup Failed	数据库备份失败
+Database Error	数据库错误
+Database Version Mismatch	数据库版本不匹配
+Decimal	十进制
+Decorations	装饰物
+Decrease Grid Size	减小网格尺寸
+Decrease the size of the grid	减小网格尺寸
+Delete	删除
+Delete Animation	删除动画
+Delete Confirmation	删除确认
+Delete Patch	删除拼块
+Delete Row(s)	删除行
+Delete Switch	删除开关
+Delete Texture	删除纹理
+Delete the currently selected row(s)	删除当前选中的行
+Delete the selected entries	删除选中的条目
+Delete the selected script	删除选中的脚本
+Deletes the selected animation(s) from the list	从列表中删除选中的动画
+Deletes the selected patch(es) from the list	从列表中删除选中的拼块
+Deletes the selected switch(es) from the list	从列表中删除选中的开关
+Deletes the selected texture(s) from the list	从列表中删除选中的纹理
+Depending on the settings in Editor->Preferences, when an archive's tab is closed, the archive itself may remain open in the editor. Its tab can then be reopened by double clicking it in the Archive Manager.	根据"编辑器->首选项"中的设置，关闭归档标签页后归档可能仍保持打开，可双击归档管理器中的该项重新打开标签页。	zh
+Depth Fog	深度雾
+Desaturated Colour Gradient	低饱和颜色渐变
+Details view	详细信息视图
+Detect Archives	检测归档
+Diamond 3x3	菱形 3x3
+Diamond 5x5	菱形 5x5
+Diamond 7x7	菱形 7x7
+Diamond 9x9	菱形 9x9
+Didn't find any duplicate texture entries to remove. Check the console for output info.	没有找到可移除的重复纹理条目，输出信息请查看控制台。	zh
+Didn't find any maps, so doing no cleanup.	没有找到任何地图，因此不执行清理。
+Didn't find any texture entries to clean. Check the console for output info.	没有找到可清理的纹理条目，输出信息请查看控制台。	zh
+Didn't find any textures overridden from the iwad	没有找到被 IWAD 覆盖的纹理
+Differing action specials detected, tick this to set the action special for all selected lines	检测到不同的动作特殊，勾选后将所有选中线段设为同一动作特殊	zh
+Differing specials detected, tick this to set the special for all selected sectors	检测到不同的特殊效果，勾选后将所有选中扇区设为同一特殊效果	zh
+Direction:	方向：
+Dither Pattern A	抖动图案 A
+Dither Pattern B	抖动图案 B
+Dither Pattern C	抖动图案 C
+Dither Pattern D	抖动图案 D
+Dither Pattern E	抖动图案 E
+Dither Pattern F	抖动图案 F
+Dither Pattern G	抖动图案 G
+Dither Pattern H	抖动图案 H
+Dither Pattern I	抖动图案 I
+Dither Pattern J	抖动图案 J
+Dither Pattern K	抖动图案 K
+Dither Pattern L	抖动图案 L
+Dither Pattern M	抖动图案 M
+Dither Pattern N	抖动图案 N
+Dither Pattern O	抖动图案 O
+Do take a look at the Editor->Preferences options! Many useful settings can be tailored to your taste here.	务必看看"编辑器->首选项"，这里有许多实用设置可按你的喜好调整。	zh
+Do you want to adjust the offsets? This will keep the graphic in the same relative position it was before cropping.	要调整偏移吗？这样可以让图形在裁剪后保持原来的相对位置。	zh
+Don't run this on TEXTURE entries unless your wad/archive is intended for newer more advanced source ports like GZDoom. The newer source ports can still properly access iwad textures if you don't include their entries in a pwad. However, older engines may rely on all of the iwad TEXTUREs being redefined in a pwad to work correctly. You should have nothing to worry about for ZDoom Format TEXTURES files.	除非你的 wad/归档面向 GZDoom 等较新的高级源端口，否则不要对 TEXTURE 条目执行此操作。较新的源端口即使 pwad 中不含这些条目也能正确访问 IWAD 纹理；但较旧的引擎可能需要 pwad 中重新定义全部 IWAD TEXTURE 才能正常工作。对 ZDoom 格式的 TEXTURES 文件则无此顾虑。	zh
+Don't show flats (wireframe)	不显示平面（线框）
+Doom (14 Palettes)	Doom（14 个调色板）
+Doom (TEXTURE1 + PNAMES)	Doom（TEXTURE1 + PNAMES）
+Doom Builder 2 Not Found	未找到 Doom Builder 2
+Double-clicking an entry in the entry list will open it in its own tab.	双击条目列表中的条目可在独立标签页中打开。	zh
+Double:	双精度：
+Drag image to change its offsets	拖动图像以更改其偏移
+Drag offsets	拖动偏移
+Drag texture to change its offsets	拖动纹理以更改其偏移
+Draw Lines	绘制线段
+Draw Shape	绘制形状
+Draw on the image	在图像上绘制
+Draw pixels	绘制像素
+Duplicate	复制
+Duplicate Entry Names Found	发现重复的条目名称
+Duplicate Selected Patch(es)	复制选中的拼块
+Duplicate the selected patch(es)	复制选中的拼块
+E&xit	退出
+Edit	编辑
+Edit Level Script	编辑关卡脚本
+Edit Object Properties	编辑物件属性
+Edit Object(s)	编辑物件
+Edit Tagged	编辑带标签项
+Edit Textures	编辑纹理
+Edit command line	编辑命令行
+Edit currently selected object(s)	编辑当前选中的物件
+Edit sector ceilings	编辑扇区天花板
+Edit sector floors	编辑扇区地板
+Edit sector floors and ceilings	编辑扇区地板与天花板
+Edit texture patches	编辑纹理拼块
+Edit the ANSI screen by selecting and modifying characters	通过选中并修改字符来编辑 ANSI 屏幕	zh
+Edit the currently selected flat (sector) properties	编辑当前选中平面（扇区）的属性
+Edit the currently selected item's properties	编辑当前选中项目的属性
+Edit the currently selected thing properties	编辑当前选中物件的属性
+Edit the currently selected wall (line) properties	编辑当前选中墙壁（线段）的属性
+Editing	编辑
+Enable Transparency	启用透明
+Enable colour & radius previews for point light things	为点光源物件启用颜色与半径预览
+End Colour:	结束颜色：
+Enter 3d Mode at Mouse Cursor	在鼠标光标处进入 3D 模式
+Enters 3d mode with the camera at the current mouse cursor position	以当前鼠标光标位置为相机位置进入 3D 模式
+Entries can be bookmarked to allow easy switching between multiple, frequently visited entries (even between different archives). Bookmarked entries appear in the 'Bookmarks' tab of the Archive Manager panel.	可以给条目添加书签，以便在多个常用条目之间快速切换（甚至可跨归档）。带书签的条目会显示在归档管理器面板的"书签"标签页中。	zh
+Entries that are shown with blue text have been modified since the Archive was last saved.	以蓝色文字显示的条目自上次保存归档以来已被修改。	zh
+Entries that are shown with green text have been newly created in the Archive and do not yet exist in a saved copy of the Archive.	以绿色文字显示的条目是归档中新建的，尚未存在于已保存的归档副本中。	zh
+Entries that are shown with orange text are locked. This means that they are currently being used or viewed elsewhere in the program.	以橙色文字显示的条目已锁定，表示它们正被程序的其他部分使用或查看。	zh
+Erase pixels	擦除像素
+Erase pixels from the image	从图像中擦除像素
+Erase this palette	擦除此调色板
+Error	错误
+Error: ACC path not defined, please configure in SLADE preferences	错误：未定义 ACC 路径，请在 SLADE 首选项中配置
+Error: DoomTools path not defined, please configure in SLADE preferences	错误：未定义 DoomTools 路径，请在 SLADE 首选项中配置
+Error: Entry does not appear to be PNG	错误：该条目似乎不是 PNG
+Error: Entry does not appear to be text	错误：该条目似乎不是文本
+Error: Java path not defined, please configure in SLADE preferences	错误：未定义 Java 路径，请在 SLADE 首选项中配置
+Error: PNG tool paths not defined or invalid, please configure in SLADE preferences	错误：PNG 工具路径未定义或无效，请在 SLADE 首选项中配置	zh
+Existing w/Threshold:	已有且带阈值：
+Exit Without Sending	退出且不发送
+Export	导出
+Export As...	导出为...
+Export Results	导出结果
+Export as PNG	导出为 PNG
+Export selected gfx entries to PNG format files	将选中的图形条目导出为 PNG 格式文件
+Export the current palette to a file	将当前调色板导出到文件
+Export the selected entries to files	将选中的条目导出为文件
+Export the selected texture(s) as PNG files	将选中的纹理导出为 PNG 文件
+External Edit Failed	外部编辑失败
+External Editors	外部编辑器
+Extra Flags	额外标志
+Extra Parameters:	额外参数：
+Extract all	全部提取
+Extract all images in this entry to separate PNGs	将此条目中的所有图像提取为单独的 PNG
+Face	面
+Failed to create a backup of the existing database before recreating it. Do you want to continue and recreate the database anyway? Note that this will result in loss of various saved info.	重建前无法备份现有数据库。是否仍要继续重建？注意这会导致各种已保存信息丢失。	zh
+Failed to delete the existing program database before recreating it, SLADE will now exit.	重建前无法删除现有程序数据库，SLADE 现在将退出。	zh
+Failed to recreate the program database, SLADE will now exit.	重建程序数据库失败，SLADE 现在将退出。
+Failed to run game executable	运行游戏可执行文件失败
+File Browser	文件浏览器
+File Modified	文件已修改
+Filter:	过滤：
+Find Next	查找下一个
+Find Previous	查找上一个
+Find Texture Errors	查找纹理错误
+Find What:	查找内容：
+Find and (optionally) replace text	查找并（可选）替换文本
+Find+Replace...	查找+替换...
+Finish	完成
+Flip	翻转
+Flip Line	翻转线段
+Flip the currently selected of hilighted line(s)	翻转当前选中或高亮的线段
+Flip the graphic vertically	垂直翻转图形
+Float:	浮点：
+Floor Textures	地板纹理
+Floors	地板
+Fold All	全部折叠
+Fold all possible code	折叠所有可折叠代码
+Font:	字体：
+Fonts && Colours	字体与颜色
+Foreground	前景
+Foreground Colour:	前景颜色：
+Found duplicate texture entries to remove. Check the console for output info. The PATCH table was left untouched. You can either delete it or clean it using the Remove Unused Patches tool.	发现可移除的重复纹理条目，输出信息请查看控制台。PATCH 表未被修改，你可以删除它或用"移除未使用拼块"工具清理。	zh
+Found texture entries to clean. Check the console for output info.	发现可清理的纹理条目，输出信息请查看控制台。
+Friction Enabled	启用摩擦力
+From	从
+From Patch	从拼块
+Front Side	正面
+Fullbright	全亮
+Game Executable:	游戏可执行文件：
+Game:	游戏：
+General	常规
+Generalised Special	广义特殊
+Generate Colormaps	生成色表
+Generate Palettes	生成调色板
+Generate colormap lump from the first palette	从第一个调色板生成色表数据块
+Generate full range of palettes from the first	从第一个调色板生成完整调色板序列
+Go To	转到
+Go to Offset...	转到偏移...
+Go to a bookmarked entry	转到书签条目
+Go to the selected bookmark	转到选中的书签
+Go up to the home (root) directory	转到主（根）目录
+Go up to the parent directory	转到上级目录
+Gradient	渐变
+Height:	高度：
+Hex	十六进制
+Hexen (28 Palettes)	Hexen（28 个调色板）
+Highlight	高亮
+Home	主目录
+Horizontal Rules	水平分隔线
+Hue Shift:	色相偏移：
+IWAD:	IWAD：
+If graphics are showing up in greyscale, make sure you either have a Base Resource Archive set, and/or have a specific palette selected in the toolbar.	如果图形显示为灰度，请确认已设置基础资源归档，和/或在工具栏中选择了特定调色板。	zh
+If you come across any problems be sure to report them as issues on GitHub, or via email (contact details are in 'Help->About').	如果遇到任何问题，请务必在 GitHub 上提交 issue，或通过邮件反馈（联系方式见"帮助->关于"）。	zh
+Ignore Texture:	忽略纹理：
+Image:	图像：
+Import	导入
+Import Directory	导入目录
+Import Failed	导入失败
+Import From...	导入自...
+Import a directory and all its contents into the archive	将目录及其全部内容导入归档
+Import a file to the selected entry	将文件导入选中的条目
+Import data from a file in the current palette	按当前调色板从文件导入数据
+Import from Base Resource Archive:	从基础资源归档导入：
+Import multiple files into the archive	将多个文件导入归档
+In New Tab	在新标签页中
+Include Paths:	包含路径：
+Increase Grid Size	增大网格尺寸
+Increase the size of the grid	增大网格尺寸
+Index	索引
+Index:	索引：
+Informaton about SLADE	关于 SLADE 的信息
+Interface	界面
+Invalid executable path	可执行文件路径无效
+Invalid map error	无效地图错误
+Invalid property name	无效属性名
+Invert	反相
+Invert the palette	反相调色板
+It's a Doom Editor	这是一个 Doom 编辑器
+Italic	斜体
+Join Sectors	合并扇区
+Join the currently selected sectors together, keeping all lines	合并当前选中的扇区，保留所有线段
+Join the currently selected sectors together, removing unneeded lines	合并当前选中的扇区，移除多余线段
+Jump To Line...	跳转到行...
+Jump To...	跳转到...
+Jump To:	跳转到：
+Jump to a specific line number	跳转到指定行号
+Jump to a specific script/function	跳转到指定脚本/函数
+Keep only this palette and erase all others	仅保留此调色板并擦除其他所有调色板
+Key Type:	按键类型：
+Kill Grounded Monsters	杀死已落地的怪物
+Kind:	种类：
+Left:	左：
+Light	光源
+Light Level:	光照等级：
+Line ID:	线段 ID：
+Line Properties	线段属性
+Lines	线段
+Lines Mode	线段模式
+List View	列表视图
+Load from File	从文件加载
+Location of DeflOpt	DeflOpt 位置
+Location of DoomTools jar:	DoomTools jar 位置：
+Location of Java executable:	Java 可执行文件位置：
+Location of PNGCrush	PNGCrush 位置
+Location of PNGout	PNGout 位置
+Location of acc executable:	acc 可执行文件位置：
+Lock:	锁定：
+Log to the console any error detected in the TEXTUREx entries	将 TEXTUREx 条目中检测到的任何错误输出到控制台
+Lower Textures	下方纹理
+Luminosity:	明度：
+Maintenance	维护
+Map Format:	地图格式：
+Map Image Export Colours	地图图像导出颜色
+Map Name:	地图名称：
+Map Preview Colours	地图预览颜色
+Mass modify offsets in the selected texture(s)	批量修改选中纹理的偏移
+Mass-modify the offsets for any selected gfx entries	批量修改选中图形条目的偏移
+Match Case	区分大小写
+Match Word (Start)	匹配单词（开头）
+Match Word (Whole)	匹配单词（完整）
+Merge Sectors	合并扇区
+Method:	方法：
+Middle Textures	中间纹理
+Mirror	镜像
+Mirror Horizontally	水平镜像
+Mirror Vertically	垂直镜像
+Mirror X	X 轴镜像
+Mirror Y	Y 轴镜像
+Mirror the graphic horizontally	水平镜像图形
+Mirror the selected objects horizontally	水平镜像选中的物件
+Mirror the selected objects vertically	垂直镜像选中的物件
+Missing Debug Symbols	缺少调试符号
+Model Sector:	模型扇区：
+Modify Gfx Offsets	修改图形偏移
+Modify Offsets	修改偏移
+Monsters Activate:	怪物激活：
+Move 3d Camera Here	将 3D 相机移到这里
+Move Down	下移
+Move Up	上移
+Move the selected animation(s) down in the list	将选中的动画在列表中下移
+Move the selected animation(s) up in the list	将选中的动画在列表中上移
+Move the selected entries down	将选中的条目下移
+Move the selected entries up	将选中的条目上移
+Move the selected switch(es) down in the list	将选中的开关在列表中下移
+Move the selected switch(es) up in the list	将选中的开关在列表中上移
+Move the selected texture(s) down in the list	将选中的纹理在列表中下移
+Move the selected texture(s) up in the list	将选中的纹理在列表中上移
+Move this palette one rank towards the first	将此调色板向首位移动一位
+Move this palette one rank towards the last	将此调色板向末位移动一位
+Name Required	需要名称
+Name:	名称：
+New Animation	新建动画
+New Archive	新建归档
+New Directory	新建目录
+New Editor Script	新建编辑器脚本
+New Entry	新建条目
+New ID	新建 ID
+New Map	新建地图
+New Switch	新建开关
+New TID	新建 TID
+New Tag	新建标签
+New Texture	新建纹理
+New Texture from File	从文件新建纹理
+New Texture from Patch	从拼块新建纹理
+Next	下一个
+Next Palette	下一调色板
+No Base Resource Archive is opened, please select/open one	未打开基础资源归档，请选择/打开一个
+No duplicated entries exist	不存在重复条目
+No duplicated entry data exist	不存在重复的条目数据
+No duplicated entry names exist	不存在重复的条目名称
+No duplicated patches exist	不存在重复的拼块
+No duplicated textures exist	不存在重复的纹理
+No game executable selected	未选择游戏可执行文件
+No item(s) selected	未选中任何项目
+No overridden entries exist	不存在被覆盖的条目
+No overridden textures exist	不存在被覆盖的纹理
+No patch selected	未选择拼块
+No recently opened files	没有最近打开的文件
+No valid Node Builder is currently configured, nodes will not be built!	当前未配置有效的节点构建器，将不会构建节点！
+Node Builder:	节点构建器：
+Node Builders	节点构建器
+Nodebuilder switched to ZDBSP for UDMF format	节点构建器已切换为适用于 UDMF 格式的 ZDBSP	zh
+Normal (Both)	正常（两侧）
+Not Implemented	尚未实现
+Not a valid translation file	不是有效的转换文件
+OK	确定
+Offset	偏移
+Offset:	偏移：
+Offsets:	偏移：
+Online &Documentation	在线文档
+Open	打开
+Open &Directory	打开目录
+Open Archive	打开归档
+Open Archives:	打开归档：
+Open Map Archive	打开地图归档
+Open Map in Doom Builder 2	在 Doom Builder 2 中打开地图
+Open Recent	打开最近文件
+Open a directory as an Archive	将目录作为归档打开
+Open an existing Archive	打开已有归档
+Open selected entries in separate tabs	在独立标签页中打开选中的条目
+Open the Gfx Conversion Dialog for any selected gfx entries	为选中的图形条目打开图形转换对话框
+Open the Gfx Conversion Dialog for the entry	为该条目打开图形转换对话框
+Open the SLADE GitHub page	打开 SLADE GitHub 页面
+Open the SLADE Scripting Documentation page	打开 SLADE 脚本文档页面
+Open the SLADE homepage	打开 SLADE 主页
+Open the Script Manager to write/run a SLADE script	打开脚本管理器以编写/运行 SLADE 脚本
+Open the map archive	打开地图归档
+Open the map editor	打开地图编辑器
+Open the map header as text (to edit fragglescript, etc.)	以文本方式打开地图头（用于编辑 Fragglescript 等）	zh
+Open the preferences dialog to set up external editors	打开首选项对话框以设置外部编辑器
+Open the selected Archive(s)	打开选中的归档
+Open the selected entry in the hex editor, regardless of type	在十六进制编辑器中打开选中的条目（不论类型）	zh
+Open the selected entry in the text editor, regardless of type	在文本编辑器中打开选中的条目（不论类型）
+Open the selected map in Doom Builder 2	在 Doom Builder 2 中打开选中的地图
+Open the texture editor for the current archive	为当前归档打开纹理编辑器
+Optimize PNG	优化 PNG
+Optimize PNG entries	优化 PNG 条目
+Optimize PNG entry	优化 PNG 条目
+Options:	选项：
+Other Properties	其他属性
+Other...	其他...
+Overridden Texture Entries	被覆盖的纹理条目
+Override Action Special	覆盖动作特殊
+Override Default Font:	覆盖默认字体：
+Override Special	覆盖特殊效果
+Override default font properties:	覆盖默认字体属性：
+PNAMES Entry Modification Warning	PNAMES 条目修改警告
+PNAMES entry not found!	未找到 PNAMES 条目！
+PNG File	PNG 文件
+PNG Tools	PNG 工具
+Paint	绘制
+Paint on to the ANSI screen using the mouse	用鼠标在 ANSI 屏幕上绘制
+Palette Range	调色板范围
+Palette Translation Only	仅调色板转换
+Palette:	调色板：
+Parameters:	参数：
+Paste	粘贴
+Paste Offsets	粘贴偏移
+Paste Row(s)	粘贴行
+Paste at the currently selected row	粘贴到当前选中的行
+Paste previously copied offsets to the graphic	将之前复制的偏移粘贴到图形
+Paste previously copied offsets to the selected gfx entries	将之前复制的偏移粘贴到选中的图形条目
+Paste the previously copied entries	粘贴之前复制的条目
+Paste the previously copied texture(s)	粘贴之前复制的纹理
+Patch	拼块
+Patch Hover Info	拼块悬停信息
+Patch Table (PNAMES)	拼块表（PNAMES）
+Patches	拼块
+Path Required	需要路径
+Path:	路径：
+Please enter a name for the editor	请输入编辑器名称
+Please enter a texture name	请输入纹理名称
+Please enter or select an executable	请输入或选择可执行文件
+Please select a patch	请选择拼块
+Point Lights	点光源
+Port:	端口：
+Preset...	预设...
+Preset:	预设：
+Presets:	预设：
+Previous	上一个
+Previous Palette	上一调色板
+Program	程序
+Properties	属性
+Pull Ahead	前移
+Push Back	后移
+Pushers/Pullers Enabled	启用推/拉者
+Quick Run Archive	快速运行归档
+Quick Run Map	快速运行地图
+Quit SLADE	退出 SLADE
+RGB Weights for Greyscale Luminance	灰度亮度 RGB 权重
+Recent Files	最近文件
+Recent Files:	最近文件：
+Redo	重做
+Regular Expression	正则表达式
+Relative	相对
+Release Notes	发行说明
+Remap a range of colours in the graphic to another range (paletted gfx only)	将图形中的一段颜色重映射到另一段（仅限调色板图形）	zh
+Remap a range of colours in the selected gfx entries to another range (paletted gfx only)	将选中图形条目中的一段颜色重映射到另一段（仅限调色板图形）	zh
+Remove	移除
+Remove Archive	移除归档
+Remove Entries Duplicated from IWAD	移除与 IWAD 重复的条目
+Remove Key	移除按键
+Remove Others	移除其他
+Remove Selected External Editors	移除选中的外部编辑器
+Remove Selected Patch(es)	移除选中的拼块
+Remove Texture Entries Duplicated from IWAD	移除与 IWAD 重复的纹理条目
+Remove Texture entries that are exact duplicates of entries from the base resource archive	移除与基础资源归档中条目完全相同的纹理条目	zh
+Remove Unused &Flats	移除未使用的平面
+Remove Unused &Patches	移除未使用的拼块
+Remove Unused &Textures	移除未使用的纹理
+Remove Unused &ZDoom Textures	移除未使用的 ZDoom 纹理
+Remove all Bookmarks	移除所有书签
+Remove all bookmarks	移除所有书签
+Remove any unused flats	移除所有未使用的平面
+Remove any unused patches, and their associated entries	移除所有未使用的拼块及其关联条目
+Remove any unused textures	移除所有未使用的纹理
+Remove any unused textures, flats, and patches in a ZDoom archive.	移除 ZDoom 归档中所有未使用的纹理、平面与拼块。
+Remove duplicate texture entries.	移除重复的纹理条目。
+Remove entries that are exact duplicates of entries from the base resource archive	移除与基础资源归档中条目完全相同的条目
+Remove selected patch(es) from the texture	从纹理中移除选中的拼块
+Remove the selected Archive(s) from the recent list	从最近列表中移除选中的归档
+Remove the selected bookmark(s) from the list	从列表中移除选中的书签
+Removed Unused Patches	已移除未使用的拼块
+Removes ZDoom TEXTURES entries that are just a single patch	移除仅含单个拼块的 ZDoom TEXTURES 条目
+Rename	重命名
+Rename Each	逐个重命名
+Rename Entry	重命名条目
+Rename Texture	重命名纹理
+Rename separately all the selected entries	逐个重命名所有选中条目
+Rename separately all the selected textures	逐个重命名所有选中纹理
+Rename the current map	重命名当前地图
+Rename the selected entries	重命名选中的条目
+Rename the selected script	重命名选中的脚本
+Rename the selected texture(s)	重命名选中的纹理
+Render the texture preview in truecolour instead of converting to the current palette	以真彩色渲染纹理预览，而不是转换为当前调色板	zh
+Replace	替换
+Replace All	全部替换
+Replace Line Specials	替换线段特殊
+Replace Selected Patch(es)	替换选中的拼块
+Replace Special:	替换特殊：
+Replace Specials	替换特殊
+Replace Texture:	替换纹理：
+Replace Textures	替换纹理
+Replace Thing Specials	替换物件特殊
+Replace Things	替换物件
+Replace Type:	替换类型：
+Replace With:	替换为：
+Replace in Maps	在地图中替换
+Replace selected patch(es) with a different patch	用其他拼块替换选中的拼块
+Replace:	替换：
+Report Failed	报告失败
+Reset MIDI Player	重置 MIDI 播放器
+Reset View	重置视图
+Reset the view to the default position	将视图重置为默认位置
+Reset to Default	重置为默认
+Restore Backup	还原备份
+Restore Backup...	还原备份...
+Restore a previous backup of the current map	还原当前地图之前的备份
+Reverse Selection	反选
+Revert	还原
+Revert Changes	还原更改
+Revert any changes made to the current texture	还原对当前纹理所做的任何更改
+Revert any changes made to the entry	还原对该条目所做的任何更改
+Revert any modifications made to the selected entries since the last save	还原选中条目自上次保存以来所做的任何修改
+Right:	右：
+Rotate	旋转
+Rotate the graphic	旋转图形
+Rotation:	旋转：
+Run	运行
+Run Archive	运行归档
+Run Configuration:	运行配置：
+Run Map	运行地图
+Run Map from Here	从此处运行地图
+Run the current archive	运行当前归档
+Run the current archive without opening the configuration dialog	直接运行当前归档，不打开配置对话框
+Run the current map	运行当前地图
+Run the current map without opening the configuration dialog	直接运行当前地图，不打开配置对话框
+Run the current map, starting at the current cursor position	从当前光标位置开始运行当前地图
+Run the current script	运行当前脚本
+SLADE Scripting &Documentation	SLADE 脚本文档
+SLADE has encountered an exception:	SLADE 遇到了异常：
+SLADE is already up to date	SLADE 已是最新版本
+SLADE on GitHub	GitHub 上的 SLADE
+Saturation:	饱和度：
+Save	保存
+Save &As	另存为
+Save All	全部保存
+Save Map	保存地图
+Save Map &As...	地图另存为...
+Save Map As	地图另存为
+Save Map Image	保存地图图像
+Save Set	保存集合
+Save all open Archives	保存所有已打开的归档
+Save any changes in the current tab	保存当前标签页中的所有更改
+Save any changes made to the TEXTUREx entry	保存对 TEXTUREx 条目所做的任何更改
+Save any changes made to the current texture	保存对当前纹理所做的任何更改
+Save any changes to the current entry	保存对当前条目的任何更改
+Save any changes to the current map	保存对当前地图的任何更改
+Save changes to script?	是否保存对脚本的更改？
+Save changes to scripts	保存对脚本的更改
+Save map overview to an image	将地图总览保存为图像
+Save the current script	保存当前脚本
+Save the currently open Archive to a new file	将当前打开的归档保存为新文件
+Save the map to a new wad archive	将地图保存为新的 wad 归档
+Save the selected Archive	保存选中的归档
+Save the selected Archive to a new file	将选中的归档保存为新文件
+Save to File	保存到文件
+Scale:	缩放：
+Script &Editor	脚本编辑器
+Script Manager	脚本管理器
+Secret	隐藏区域
+Sector Properties	扇区属性
+Sector Tag:	扇区标签：
+Sectors	扇区
+Sectors Mode	扇区模式
+Select sectors/things to tag to this line's special	选择要标记到此线段特殊动作的扇区/物件
+Select translation for drawing tool	为绘制工具选择色彩转换
+Selected Game Configuration does not match the map format	所选游戏配置与地图格式不匹配
+Send And Continue	发送并继续
+Send Selected Patch(es) Back	将选中拼块后移
+Send and Exit	发送并退出
+Send selected patch(es) toward the back	将选中的拼块向后面移动
+Sending...	正在发送...
+Set &Base Resource Archive	设置基础资源归档
+Set Key	设置按键
+Set Offsets	设置偏移
+Set brush colour	设置笔刷颜色
+Set brush shape	设置笔刷形状
+Set brush translation	设置笔刷色彩转换
+Set the Base Resource Archive, to act as the program 'IWAD'	设置基础资源归档，作为程序的"IWAD"
+Set the current position of the 3d mode camera to the cursor position	将 3D 模式相机当前位置设为光标位置	zh
+Setup External Editors	设置外部编辑器
+Setup SLADE options and preferences	设置 SLADE 选项与首选项
+Shape:	形状：
+Show All	显示全部
+Show Full Map	显示完整地图
+Show Item...	显示项目...
+Show Language List	显示语言列表
+Show Outside	显示外部
+Show Thing Boxes	显示物件框
+Show Things	显示物件
+Show all things	显示所有物件
+Show alternating row colours	显示交替行颜色
+Show boxes for all things	显示所有物件的框
+Show boxes for solid things only	仅显示实心物件的框
+Show decoration things only	仅显示装饰物
+Show horizontal rules between entries	在条目之间显示水平分隔线
+Show patch info text on hover	悬停时显示拼块信息文本
+Show patches that are outside the texture	显示纹理外的拼块
+Show textured flats	显示带纹理的平面
+Show the SLADE Start Page	显示 SLADE 起始页
+Show the index column	显示索引列
+Show the size column	显示大小列
+Show the type column	显示类型列
+Show untextured flats	显示无纹理的平面
+Show vertical rules between columns	在列之间显示垂直分隔线
+Show/Hide the language list	显示/隐藏语言列表
+Show:	显示：
+Sides:	侧面：
+Signed Byte:	有符号字节：
+Signed Int (32bit):	有符号整数（32 位）：
+Signed Int (64bit):	有符号整数（64 位）：
+Signed Integer (32bit):	有符号整数（32 位）：
+Signed Short:	有符号短整数：
+Silent:	静音：
+Size	大小
+Size:	大小：
+Skip	跳过
+Skip All	全部跳过
+Sky	天空
+Solid Only	仅实心
+Some entries could not be converted, see console log for details	部分条目无法转换，详情请查看控制台日志
+Sort	排序
+Sort the selected entries in the list, or all entries if only one is selected	对列表中选中的条目排序；若只选中一个条目则对所有条目排序	zh
+Sort the textures in the list	对列表中的纹理排序
+Sort:	排序：
+Special	特殊
+Specials	特殊
+Specifies the 'cutoff' transparency level, anything above this will be fully opaque, anything equal or below will be completely transparent	指定"截断"透明度等级：高于该值的完全不透明，等于或低于该值的完全透明	zh
+Speed:	速度：
+Square 1x1	方形 1x1
+Square 3x3	方形 3x3
+Square 5x5	方形 5x5
+Square 7x7	方形 7x7
+Square 9x9	方形 9x9
+Stack Trace:	调用栈：
+Stack trace successfully copied to clipboard	调用栈已成功复制到剪贴板
+Start Colour:	起始颜色：
+Start Page	起始页
+Start from 3D mode camera position	从 3D 模式相机位置开始
+Step Height	台阶高度
+Strife (TEXTURE1 + PNAMES)	Strife（TEXTURE1 + PNAMES）
+Style Set:	样式集：
+Switch the entry list to a flat list view	将条目列表切换为平铺列表视图
+Switch the entry list to a tree view	将条目列表切换为树状视图
+System Info	系统信息
+TID:	TID：
+Tag:	标签：
+Target:	目标：
+Temporarily add the current palette to the palette chooser	临时将当前调色板添加到调色板选择器
+Test Palette	测试调色板
+Text	文本
+Text Language:	文本语言：
+Texture:	纹理：
+Textured	带纹理
+Textures	纹理
+The 'Filter' text box below the entry list can be used to quickly filter entries by name. Wildcards are supported here, too (eg. '*.png').	条目列表下方的"过滤"文本框可按名称快速过滤条目，同样支持通配符（如 "*.png"）。	zh
+The 'Show' dropdown menu below the entry list can be used to quickly filter entries by type.	条目列表下方的"显示"下拉菜单可按类型快速过滤条目。	zh
+The Archive Manager panel can be quickly toggled using the keyboard shortcut Ctrl+1.	可用快捷键 Ctrl+1 快速切换归档管理器面板。	zh
+The console can perform some useful functions. Press Ctrl+2 to bring it up and type 'cmdlist' for a list of valid commands.	控制台可以实现一些实用功能。按 Ctrl+2 打开，输入 "cmdlist" 可查看有效命令列表。	zh
+The program database is from a newer version of SLADE than the current version. Do you want to recreate the database for the current version? Note that this will result in loss of various saved info. A backup of the existing database will be created.	程序数据库来自比当前版本更新的 SLADE。是否为当前版本重建数据库？注意这会导致各种已保存信息丢失，现有数据库的备份将会被创建。	zh
+The selected folder cannot be written to. Please select a different folder to use.	所选文件夹不可写入，请选择其他文件夹。
+Thing Properties	物件属性
+Thing Types	物件类型
+Things	物件
+Things Mode	物件模式
+This currently only works with archives that support directories	目前仅适用于支持目录的归档
+This finds what Zdoom textures your archive overrides from the iwad. Since this is for zdoom, it checks across flats, patches, and other assets. The Check Entries Overridden from IWAD tool checks general overrides.	查找你的归档覆盖了 IWAD 中的哪些 ZDoom 纹理。由于面向 ZDoom，它会检查平面、拼块及其他资源。"检查被 IWAD 覆盖的条目"工具则检查一般性的覆盖。	zh
+This function is only supported with directories	此功能仅支持目录
+This operation is extremely slow if the archive has many entries and is open in SLADE with a tab. This tool will close the archive and reopen it in the background to process it, and save changes when done. You should make sure to save any changes now if you have any. Also, keep in mind this tool won't find any textures you reference in scripts. There is currently limited support for animated and switch textures so the tool will deselect all such textures found in ANIMDEFS by default and you can manually choose to delete them later. The ANIMDEFS parser itself is not quite reliable yet either and may not handle particularly complex syntax.	如果归档条目很多且已在 SLADE 中以标签页打开，此操作会极其缓慢。该工具会关闭归档并在后台重新打开以进行处理，完成后保存更改。请务必先保存你现有的所有更改。另请注意：此工具不会找到脚本中引用的纹理；目前对动画和开关纹理的支持有限，因此默认会取消选中 ANIMDEFS 中找到的所有此类纹理，你可以稍后手动选择删除。ANIMDEFS 解析器本身也尚不完全可靠，可能无法处理特别复杂的语法。	zh
+This will remove all textures that are made out of a basic single patch from this textures entry. It will also rename all of the patches to the texture name and move them from the patches to the textures folder.	这会从纹理条目中移除所有由单个基础拼块构成的纹理，并将这些拼块重命名为纹理名，再从 patches 目录移到 textures 目录。	zh
+Tile	平铺
+Tint	着色
+Tint Range	着色范围
+Tint the graphic by a colour/amount	按颜色/强度为图形着色
+Tint the palette	为调色板着色
+Tint the selected gfx entries by a colour/amount	按颜色/强度为选中的图形条目着色
+Title	标题
+To	到
+Toggle Bookmark	切换书签
+Toggle Filter Controls	切换过滤控件
+Toggle Grid Snapping	切换网格吸附
+Toggle Light Previews	切换光源预览
+Toggle aspect ratio correction	切换宽高比修正
+Toggle bookmark on the current entry	切换当前条目的书签
+Toggle depth fog approximation preview	切换深度雾近似预览
+Toggle fullbright rendering	切换全亮渲染
+Toggle image tiling	切换图像平铺
+Toggle item highlighting	切换项目高亮
+Toggle point light previews	切换点光源预览
+Toggle sky rendering	切换天空渲染
+Toggle the Archive Manager window	切换归档管理器窗口
+Toggle the Console window	切换控制台窗口
+Toggle the Item Properties window	切换物件属性窗口
+Toggle the Map Checks window	切换地图检查窗口
+Toggle the Script Editor window	切换脚本编辑器窗口
+Toggle the Scripts window	切换脚本窗口
+Toggle the Undo History window	切换撤销历史窗口
+Toggle the list filtering controls	切换列表过滤控件
+Toggle the texture list filtering controls	切换纹理列表过滤控件
+Toggle thing box visibility	切换物件框可见性
+Toggle thing visibility	切换物件可见性
+Toggle word wrapping	切换自动换行
+Tool to find and replace thing types, specials and textures in all maps	在所有地图中查找并替换物件类型、特殊动作与纹理的工具	zh
+Toolbars	工具栏
+Top:	顶部：
+Translate pixels	转换像素
+Translation String:	转换字符串：
+Transparency from Brightness	由亮度生成透明度
+Transparent Colour:	透明颜色：
+Tree View	树状视图
+Trigger:	触发：
+Truecolor	真彩色
+Truecolour Preview	真彩色预览
+Tweak	微调
+Tweak the palette	微调调色板
+Type	类型
+Type text on to the ANSI screen	在 ANSI 屏幕上输入文本
+Type:	类型：
+Unable to access the system clipboard, please select+copy the text above manually	无法访问系统剪贴板，请手动选择并复制上面的文本	zh
+Unable to convert - could not find PNAMES entry	无法转换 - 未找到 PNAMES 条目
+Unable to find slade.pk3, make sure it exists in the same directory as the SLADE executable	找不到 slade.pk3，请确认它与 SLADE 可执行文件位于同一目录	zh
+Uncheck this to remove any existing transparency from the graphic	取消勾选可移除图形中现有的透明度
+Underlined	下划线
+Undo	撤销
+Unfold All	全部展开
+Unfold all folded code	展开所有已折叠的代码
+Unsaved Changes	未保存的更改
+Unsigned Byte:	无符号字节：
+Unsigned Int (32bit):	无符号整数（32 位）：
+Unsigned Int (64bit):	无符号整数（64 位）：
+Unsigned Integer (32bit):	无符号整数（32 位）：
+Unsigned Short:	无符号短整数：
+Untextured	无纹理
+Up Directory	上级目录
+Update Entry Extension(s)	更新条目扩展名
+Update check failed: received invalid version info.	检查更新失败：收到的版本信息无效。
+Update check failed: unable to connect to internet. Check your connection and try again.	检查更新失败：无法连接网络。请检查网络连接后重试。	zh
+Upper Textures	上方纹理
+Use ++, --, *, / to make relative changes, e.g., ++16 to increase by 16	可使用 ++、--、*、/ 进行相对修改，例如 ++16 表示增加 16	zh
+Use SLADE installation folder	使用 SLADE 安装目录
+Use custom folder:	使用自定义文件夹：
+Use drag-and-drop with the middle button to move your viewpoint when looking at an image or a texture.	查看图像或纹理时，可用中键拖拽来移动视角。	zh
+Use system temp folder (Recommended)	使用系统临时文件夹（推荐）
+Used in:	用于：
+Version:	版本：
+Vertical Rules	垂直分隔线
+Vertices	顶点
+Vertices Mode	顶点模式
+View	视图
+View As:	查看为：
+View Distance:	可视距离：
+View SLADE documentation online	在线查看 SLADE 文档
+View as Hex	以十六进制查看
+View as Text	以文本查看
+View only	仅查看
+Volume:	音量：
+Wait Time:	等待时间：
+Warning	警告
+Warning: Couldn't optimize this image, check console log for info	警告：无法优化此图像，详情请查看控制台日志
+Warning: conversion will result in loss of metadata and audio quality. Do you wish to proceed?	警告：转换将导致元数据和音频质量损失，是否继续？	zh
+When enabled, all editing operations are snapped to the grid (eg. placing vertices, etc.)	启用后，所有编辑操作都会吸附到网格（例如放置顶点等）	zh
+When multiple entries are selected, you can either rename them all at once using a mask (Rename), or rename each of them individually (Rename Each).	选中多个条目时，可以用掩码一次性重命名全部（重命名），也可以逐个分别重命名（逐个重命名）。	zh
+Wireframe	线框
+With Special:	特殊动作：
+With Texture:	纹理：
+With Type:	类型：
+With:	与：
+Word Wrapping	自动换行
+Write Report	写入报告
+Write an info report on this palette	编写关于此调色板的信息报告
+X Offset:	X 偏移：
+X Scale:	X 缩放：
+X:	X：
+Y Offset:	Y 偏移：
+Y Scale:	Y 缩放：
+Yes, this command does actually exist and *will* crash the program. Do you really want it to crash?	是的，这个命令确实存在，而且*会*让程序崩溃。你真的想让它崩溃吗？	zh
+You can change the colors of the background pattern behind graphics in the Preference menu.	可以在首选项菜单中更改图形背后背景图案的颜色。	zh
+You can customise the entry list columns by right clicking the column headers.	右键单击列标题可自定义条目列表的列。	zh
+You can drag files onto the entry list to import them.	可以将文件拖到条目列表上以导入。	zh
+You can export composite textures from the texture editor into standalone graphics.	可以从纹理编辑器将复合纹理导出为独立图形。	zh
+You can look up a function or property online from the text editor by ctrl+clicking the function name (if the text language supports it).	在文本编辑器中按住 Ctrl 单击函数名，可在线查询该函数或属性（前提是文本语言支持）。	zh
+Z Height:	Z 高度：
+Z:	Z：
+ZDoom (TEXTURES)	ZDoom（TEXTURES）
+ZDoom PK3 Path:	ZDoom PK3 路径：
+Zoom and scroll to show a map item	缩放并滚动以显示地图项目
+Zoom:	缩放：
+Zooms out so that the full map is visible	缩小到可以看到完整地图
+alPh chunk	alPh 数据块
+tRNS chunk	tRNS 数据块
+&Edit	编辑
+&Export To	导出为
+&File	文件
+&Help	帮助
+&Map	地图
+&New	新建
+&Patch	拼块
+&Recent Files	最近文件
+&Run Script	运行脚本
+&Script	脚本
+&Text	文本
+&Tools	工具
+&View	视图
+Advanced Settings	高级设置	zh
+Audio	音频
+Audio Settings	音频设置	zh
+Base Resource Archives	基础资源归档	zh
+Code Folding	代码折叠
+Colorimetry Settings	色度设置	zh
+Colour Scheme	配色方案
+Dither Patterns	抖动图案
+E&dit	编辑
+Editing Settings	编辑设置	zh
+General Settings	常规设置	zh
+Graphics	图形
+Graphics Settings	图形设置	zh
+Grid	网格
+Interface Settings	界面设置	zh
+Keyboard Shortcuts	键盘快捷键
+Map Editor Display Settings	地图编辑器显示设置	zh
+Map Editor Settings	地图编辑器设置	zh
+New	新建
+No scripts available	没有可用的脚本
+Page Title	页面标题
+Redo To Here	重做到此处
+Reset Sorting	重置排序
+Run &Script	运行脚本
+Run Script	运行脚本
+SLADE Temp Folder	SLADE 临时文件夹
+Script	脚本
+Scripting && Compiler Settings	脚本与编译器设置	zh
+Text Editor Fonts & Colours	文本编辑器字体与颜色	zh
+Text Editor Settings	文本编辑器设置	zh
+Texture Editor Settings	纹理编辑器设置	zh
+Undo To Here	撤销到此处
+View As	查看为
+Voxels	体素
+Windows	窗口
+Action on external directory changes	外部目录变更时的操作
+Action on unsaved entry changes	未保存条目变更时的操作
+After indentation only	仅在缩进之后
+Always show direction arrows	始终显示方向箭头
+Always show line direction tabs	始终显示线方向标签
+Animated highlight	动画高亮
+Animated selection	动画选择
+Animated tag indicator	动画标签指示
+Application theme	应用主题
+Apply Changes	应用更改
+Automatically adjust texture offsets on split lines	拆分线段时自动调整纹理偏移
+Automatically apply property panel changes	自动应用属性面板更改
+Automatically open nested Wad Archives	自动打开嵌套的 WAD 归档
+Automatically replace entries with same name as drag-and-dropped files	拖放文件时自动替换同名条目	zh
+Autoplay audio entries when opened	打开音频条目时自动播放
+Background+Underline	背景+下划线
+Backup archives before saving	保存前备份归档
+Browser Background	浏览器背景
+Camera FOV	相机视野（FOV）
+Carmack's Typo	Carmack 的笔误
+Centered default graphics view	默认图形视图居中
+Check for updates on startup	启动时检查更新
+Clear selection after moving (dragging) map elements	移动（拖动）地图元素后清除选择	zh
+Clear selection when nothing is clicked	点击空白处时清除选择
+Close archive when its tab is closed	关闭标签页时关闭归档
+Colour background by entry type	按条目类型着色背景
+Colourise calltip text	为提示文本着色
+Column padding	列间距
+Command-line options	命令行选项
+Compress SIDEDEFS	压缩 SIDEDEFS
+Condensed Translation Editor layout	紧凑的转换编辑器布局
+Condensed tabs	紧凑标签页
+Create a 'Merge' undo step on move/edit map architecture	移动/编辑地图架构时创建“合并”撤销步骤	zh
+Current line highlight	当前行高亮
+Cursor crosshair	光标准星
+Custom soundfont	自定义音色库
+Dashed grid	虚线网格
+Data Grid	数据网格
+Default / Standard	默认 / 标准
+Dim optional function parameters	淡化可选函数参数
+Don't Save	不保存
+Double-click to edit properties	双击编辑属性
+Enable auto-indent	启用自动缩进
+Enable chorus effect	启用合唱效果
+Enable code folding	启用代码折叠
+Enable reverb effect	启用混响效果
+Enable syntax highlighting	启用语法高亮
+Entry List	条目列表
+Entry Naming	条目命名
+Extra line spacing	额外行距
+Fade flats when not in sectors mode	非扇区模式时淡化平面
+Fade when not focused	未聚焦时淡化
+Fade when not in lines mode	非线段模式时淡化
+Fake contrast on orthogonal walls	正交墙壁上的伪对比度
+Fill in missing textures when changing sector heights	更改扇区高度时填补缺失纹理	zh
+Filled sector highlight	实心扇区高亮
+Filled sector selection	实心扇区选择
+Flat brightness	平面亮度
+Flats ignore sector brightness	平面忽略扇区亮度
+Fluidsynth Options	Fluidsynth 选项
+Fold comment blocks	折叠注释块
+Fold preprocessor regions	折叠预处理器区域
+Force square highlight/selection overlay	强制方形高亮/选择覆盖层
+Force uppercase entry names in Wad Archives	强制 WAD 归档中的条目名大写
+Highlight graphics on mouse hover	鼠标悬停时高亮图形
+Highlight matching braces	高亮匹配的括号
+Highlight matching words	高亮匹配的单词
+Highlight origin (0,0) on grid	在网格上高亮原点 (0,0)
+Hud Offsets View	HUD 偏移视图
+Ignore Changes	忽略更改
+Ignore directories when filtering by name	按名称过滤时忽略目录
+Ignore hidden files in directories	忽略目录中的隐藏文件
+Include beta versions when checking for updates	检查更新时包含测试版
+Indent with spaces	用空格缩进
+Indentation width	缩进宽度
+Invert mouse Y axis in 3D mode	3D 模式下反转鼠标 Y 轴
+Item highlight:	项目高亮：
+Line thickness	线条粗细
+Linear RGB	线性 RGB
+MIDI player	MIDI 播放器
+Map Architecture	地图架构
+Max backups to keep	保留的最大备份数
+Max dynamic lights	最大动态光源数
+Merge lines when deleting a vertex	删除顶点时合并线段
+Migrate selection when switching edit modes	切换编辑模式时迁移选择
+Offer additional conversion options	提供额外转换选项
+RGB (double)	RGB（浮点）
+RGB (integer)	RGB（整数）
+Remove any resulting invalid lines after deleting a sector	删除扇区后移除产生的无效线段	zh
+Right margin at column	右边距列
+Round vertices	圆形顶点
+Row padding	行间距
+Sample rate	采样率
+Show FPS counter	显示 FPS 计数器
+Show action lines	显示动作线
+Show calltips on mouse hover	鼠标悬停时显示提示
+Show calltips on opening parenthesis	输入左括号时显示提示
+Show center line	显示中心线
+Show confirmation dialog on deleting an entry	删除条目时显示确认对话框
+Show confirmation dialog on exit	退出时显示确认对话框
+Show confirmation dialog on reverting entry changes	还原条目更改时显示确认对话框	zh
+Show distance under crosshair	在准星下显示距离
+Show help text	显示帮助文本
+Show indentation guides	显示缩进参考线
+Show lines at contracted code folding regions	在折叠的代码区域显示线条	zh
+Show outline around graphics and textures	在图形和纹理周围显示轮廓
+Show sprites on round or square things	在圆形或方形物件上显示精灵
+Show status bar lines	显示状态栏行
+Show the Start Page on startup	启动时显示起始页
+Show weapon bob outline	显示武器摆动轮廓
+Show whitespace	显示空白字符
+Show widescreen borders	显示宽屏边界
+Smooth lines	平滑线条
+Sprite Only	仅精灵
+Texture filter	纹理过滤
+Thing shadow opacity	物件阴影不透明度
+Thing shape	物件形状
+Timidity (external)	Timidity（外部）
+Timidity Options	Timidity 选项
+Timidity executable path	Timidity 可执行文件路径
+Toolbar icons	工具栏图标
+Transparent (as above)	透明（同上）
+Transparent Background Colours	透明背景颜色
+Trim whitespace on save	保存时去除空白
+Use DMX padding when appropriate	适当时使用 DMX 填充
+Use ZETH thing type icons	使用 ZETH 物件类型图标
+Use monospace font in data grid	数据网格使用等宽字体
+Use monospace font in lists	列表使用等宽字体
+Use percent encoding if needed outside of Wad Archives	在 WAD 归档外按需使用百分号编码	zh
+Use the text editor font in calltips	提示使用文本编辑器字体
+Use up/down keys to cycle function signatures	用上下键切换函数签名
+Vertex mode only	仅顶点模式
+Vertex size	顶点大小
+When necessary	必要时
+When not in things mode	非物件模式时
+When not in vertices mode	非顶点模式时
+When saving a map, also save its parent archive	保存地图时同时保存其父归档
+Zoom towards cursor when using mouse wheel	使用滚轮时朝向光标缩放
+Custom	自定义
+Flags	标志
+Lighting	光照
+Offsets	偏移
+Patch Properties	拼块属性
+Scripting Special	脚本特殊
+Texture Properties	纹理属性
+Theme	主题
+Ceiling Height	天花板高度
+Ceiling Texture	天花板纹理
+Floor Height	地板高度
+Floor Texture	地板纹理
+Light Level	光照等级
+Lower Texture	下方纹理
+Middle Texture	中间纹理
+Sector	扇区
+Upper Texture	上方纹理
+X Offset	X 偏移
+Y Offset	Y 偏移
+X Position	X 位置
+Y Position	Y 位置
+Z Height	Z 高度
+Open Directory	打开目录
+Create New Archive	新建归档
+Create New Map	新建地图
+First Time SLADE Setup	首次运行设置
+Filename	文件名	zh
+Path	路径	zh
+Entry	条目
+Archive	归档
+Add 'Base Resource' archives to the list. These can be selected from the dropdown in the toolbar, and will be used as a base (eg. IWAD) for editing. Usually these will be game IWADs: doom2.wad, heretic.wad, etc. If no base resource archive is selected, certain features will not work correctly.	将「基础资源」归档添加到列表中。可以在工具栏的下拉框中选择它们，作为编辑时的基础资源（例如 IWAD）。通常这些是游戏 IWAD：doom2.wad、heretic.wad 等。如果没有选择基础资源归档，某些功能将无法正常工作。	zh
+If you plan to do any map editing, set up the paths to any node builders you have. You can also set up the build options for each node builder. Note that ZDoom does not require nodes to be built, so if you are creating ZDoom-only maps, you can select "Don't Build Nodes" and continue.	如果你打算编辑地图，请设置已有节点构建器的路径，还可以为每个节点构建器配置构建选项。注意 ZDoom 不需要构建节点，因此如果只做 ZDoom 地图，可以直接选择「不构建 Nodes」继续。	zh
+Select the temp folder for SLADE to use during various operations. Usually the system temp folder will be fine to use, however sometimes it will not be write accessable, which can cause problems.	选择 SLADE 在各类操作中使用的临时文件夹。通常系统临时文件夹即可，但有时它不可写，会导致问题。	zh
+SLADE Settings	SLADE 设置
+Text Editor	文本编辑器
+Texture Editor	纹理编辑器
+Scripting & Compilers	脚本与编译器
+Map Editor	地图编辑器
+Map Editor Display	地图显示
+Advanced	高级
+Control	操作
+Bound Keys	绑定的按键
+Map Editor General	地图编辑器 常规
+Map Editor 2D Mode	地图编辑器 2D 模式
+Map Editor 2D Lines Mode	地图编辑器 2D 线段模式
+Map Editor 2D Sectors Mode	地图编辑器 2D 扇区模式
+Map Editor 2D Things Mode	地图编辑器 2D 物件模式
+Map Editor 3D Mode	地图编辑器 3D 模式
+Map Editor 3D Mode Camera	地图编辑器 3D 模式：相机
+Map Editor 3D Mode Light	地图编辑器 3D 模式：光照
+Map Editor 3D Mode Offsets	地图编辑器 3D 模式：偏移
+Map Editor 3D Mode Scaling	地图编辑器 3D 模式：缩放
+Map Editor 3D Mode Walls	地图编辑器 3D 模式：墙壁
+Map Editor 3D Mode Flats	地图编辑器 3D 模式：平面
+Map Editor 3D Mode Things	地图编辑器 3D 模式：物件
+Accept edit	接受编辑
+Adjust brightness	调整亮度
+Auto-align textures on X	自动对齐纹理 X
+Auto-align textures on Y	自动对齐纹理 Y
+Begin object edit	开始编辑物件
+Begin tag edit	开始编辑标签
+Block Comment	块注释
+Bring Patch forward	前移拼块
+Camera backward	相机后退
+Camera forward	相机前进
+Camera look down	相机向下看
+Camera look up	相机向上看
+Camera move or look down	相机移动或向下看
+Camera move or look up	相机移动或向上看
+Camera strafe left	相机左平移
+Camera strafe right	相机右平移
+Camera turn left	相机左转
+Camera turn right	相机右转
+Cancel edit	取消编辑
+Ceiling height down 1	天花板高度 -1
+Ceiling height down 8	天花板高度 -8
+Ceiling height up 1	天花板高度 +1
+Ceiling height up 8	天花板高度 +8
+Change texture(s)	更改纹理
+Copy object properties	复制物件属性
+Copy texture or thing type	复制纹理或物件类型
+Create object	创建物件
+Cycle Comments	循环注释
+Cycle flat type	切换平面类型
+Decrement grid level	减小网格级别
+Delete Entry	删除条目
+Delete object	删除物件
+Duplicate Patch	复制拼块
+Enter 3d mode at the mouse cursor position	在鼠标位置进入 3D 模式
+Export Entry	导出条目
+Find/Replace	查找/替换
+Flip line(s)	翻转线段
+Flip line(s) but not sides	翻转线段（不含侧面）
+Flood-fill texture	填充纹理
+Floor height down 1	地板高度 -1
+Floor height down 8	地板高度 -8
+Floor height up 1	地板高度 +1
+Floor height up 8	地板高度 +8
+Height down 1	高度 -1
+Height down 8	高度 -8
+Height up 1	高度 +1
+Height up 8	高度 +8
+Import Files	导入文件
+Import to Entry	导入到条目
+Increment grid level	增大网格级别
+Join sectors (keep lines)	合并扇区（保留线段）
+Jump to Line	跳转到线段
+Light level down 1	光照等级 -1
+Light level down 16	光照等级 -16
+Light level up 1	光照等级 +1
+Light level up 16	光照等级 +16
+Line Comment	行注释
+Lock/unlock highlight	锁定/解锁高亮
+Lower target 1	降低目标 1
+Lower target 8	降低目标 8
+Mirror selection horizontally	水平镜像选择
+Mirror selection vertically	垂直镜像选择
+Move Entry down	下移条目
+Move Entry up	上移条目
+Move Patch down	下移拼块
+Move Patch down 8	下移拼块 8
+Move Patch left	左移拼块
+Move Patch left 8	左移拼块 8
+Move Patch right	右移拼块
+Move Patch right 8	右移拼块 8
+Move Patch up	上移拼块
+Move Patch up 8	上移拼块 8
+Move Texture down	下移纹理
+Move Texture up	上移纹理
+Object Properties	物件属性
+Open Autocompletion list	打开自动补全列表
+Open CallTip	打开调用提示
+Pan view	平移视图
+Paste object properties	粘贴物件属性
+Paste texture or thing type	粘贴纹理或物件类型
+Quick angle edit	快速编辑角度
+Quick Texture	快速纹理
+Raise target 1	升高目标 1
+Raise target 8	升高目标 8
+Replace next	替换下一个
+Replace Patch	替换拼块
+Reset offsets and scaling	重置偏移与缩放
+Rotate clockwise	顺时针旋转
+Rotate counterclockwise	逆时针旋转
+Scroll down	向下滚动
+Scroll left	向左滚动
+Scroll right	向右滚动
+Scroll up	向上滚动
+Sector light level down 1	扇区光照等级 -1
+Sector light level down 16	扇区光照等级 -16
+Sector light level up 1	扇区光照等级 +1
+Sector light level up 16	扇区光照等级 +16
+Select All	全选
+Select All Occurrences	选择所有出现项
+Select Next Occurrence	选择下一个出现项
+Send Patch back	后移拼块
+Split nearest line	拆分最近的线段
+Take Screenshot	截图
+Toggle 3d mode	切换 3D 模式
+Toggle camera gravity	切换相机重力
+Toggle fog	切换雾效
+Toggle full brightness	切换全亮度
+Toggle Grid Snap	切换网格吸附
+Toggle highlight	切换高亮
+Toggle information overlay	切换信息叠加层
+Toggle item move mode	切换项目移动模式
+Toggle linked flat light levels	切换平面光照联动
+Toggle linked wall offsets	切换墙面偏移联动
+Toggle lower unpegged	切换下方不钉齐
+Toggle mouselook	切换鼠标视角
+Toggle selection numbers	切换选择编号
+Toggle thing boxes	切换物件方框
+Toggle thing display	切换物件显示
+Toggle upper unpegged	切换上方不钉齐
+Up one directory	上一级目录
+X offset down 1	X 偏移 -1
+X offset down 8	X 偏移 -8
+X offset up 1	X 偏移 +1
+X offset up 8	X 偏移 +8
+X scale down (large)	X 缩放 -（大）
+X scale down (small)	X 缩放 -（小）
+X scale up (large)	X 缩放 +（大）
+X scale up (small)	X 缩放 +（小）
+Y offset down 1	Y 偏移 -1
+Y offset down 8	Y 偏移 -8
+Y offset up 1	Y 偏移 +1
+Y offset up 8	Y 偏移 +8
+Y scale down (large)	Y 缩放 -（大）
+Y scale down (small)	Y 缩放 -（小）
+Y scale up (large)	Y 缩放 +（大）
+Y scale up (small)	Y 缩放 +（小）
+Z down 1	Z -1
+Z down 8	Z -8
+Z up 1	Z +1
+Z up 8	Z +8
+Zoom in	放大
+Zoom in, show current object	放大并显示当前物件
+Zoom out	缩小
+Zoom out, show full map	缩小并显示全图
+Change type	更改类型
+Clear selection	清除选择
+Find next	查找下一个
+Find previous	查找上一个
+Join sectors	合并扇区
+Lines mode	线段模式
+Replace all	全部替换
+Sectors mode	扇区模式
+Things mode	物件模式
+Vertices mode	顶点模式
+Console	控制台
+Archive Manager	归档管理器
+Undo History	撤销历史
+Item Properties	物件属性
+Script Editor	脚本编辑器
+Shape Drawing	形状绘制
+Object Edit	物件编辑
+Map Checks	地图检查
+Scripts	脚本
+Warning: Only modify these values if you know what you are doing!\nMost of these settings can be changed more safely from the other sections.	警告：只有在你清楚自己在做什么时才修改这些值！\n这些设置大部分可以在其他分类中更安全地修改。
+Browse for BSP Executable	浏览 BSP 可执行文件
+Browse for ELFBSP v1.3 Executable	浏览 ELFBSP v1.3 可执行文件
+Browse for GLBSP Executable	浏览 GLBSP 可执行文件
+Browse for ZDBSP Executable	浏览 ZDBSP 可执行文件
+Browse for ZenNode Executable	浏览 ZenNode 可执行文件
+Add UDMF index comments	添加 UDMF 索引注释
+Build DeePBSPV4 nodes	构建 DeePBSPV4 节点
+Build GL nodes (fast)	构建 GL 节点（快速）
+Build GL nodes (full)	构建 GL 节点（完整）
+Build only GL nodes	仅构建 GL 节点
+Build vanilla nodes	构建原版节点
+Build XBM1 BLOCKMAP	构建 XBM1 BLOCKMAP
+Build XGL2 nodes	构建 XGL2 节点
+Build XGL3 nodes	构建 XGL3 节点
+Build XGLN nodes	构建 XGLN 节点
+Compressed BLOCKMAP	压缩 BLOCKMAP
+Compressed nodes	压缩节点
+Compressed nodes (all)	压缩节点（全部）
+Compressed nodes (not GL)	压缩节点（非 GL）
+Don't add line 0 to all blocklists	不将所有块列表加入线段 0
+Don't build normal nodes	不构建普通节点
+Don't build REJECT	不构建 REJECT
+Don't prune lines or sides	不精简线段或侧面
+Don't remove unused sidedefs or sectors	不移除未使用的侧面或扇区
+Don't write REJECT	不写入 REJECT
+Extended nodes	扩展节点
+Fast node build	快速构建节点
+Force normal node rebuild	强制重建普通节点
+Handle 'one-sided window' trick	处理“单面窗”技巧
+Ignore invisible lines	忽略不可见线段
+Merge duplicate vertices	合并重复顶点
+Minimize visplanes	最小化可视平面
+Pack duplicate sidedefs	合并重复侧面
+Prune unused sectors	精简未使用扇区
+Skip special effects (see ELFBSP docs)	跳过特殊效果（见 ELFBSP 文档）
+Use Hexen polyobject editor numbers (300x) instead of ZDoom (930x)	使用 Hexen 多面体编辑器编号（300x）而非 ZDoom（930x）
+Vanilla Optimized	原版优化
+Verbose output	详细输出
+Write empty BLOCKMAP	写入空 BLOCKMAP
+Write empty REJECT	写入空 REJECT
+Write zero REJECT	写入全零 REJECT
+Animation	动画
+Controls	控制
+Selection	选择
+Calltips	调用提示
+Display	显示
+Map Saving	地图保存
+Behaviour	行为
+Appearance	外观
+Whitespace && Indentation	空白与缩进
+Ask	询问
+System	系统
+Black	黑色
+Hide	隐藏
+Show	显示
+Fade	渐变
+No	否
+Always	总是
+None	无
+Full	完整
+Crosses	十字
+Linear	线性
+Mipmapped	多级纹理
+Small	小
+Round	圆形
+Square	方形
+Never	从不
+Off	关闭
+Minimap	小地图
+Medium	中
+Large	大
+Name	名称
+Icons	图标
+Fill	填充
+Outline	轮廓
+Both	两者
+Default	默认
+Default (Dark)	默认（深色）
+External Editor	外部编辑器
+Vintage Id Software	经典 id Software
+Save Style Set	保存样式集
+Enter Style Set name:	输入样式集名称：
+Category:	类别：
+Choose file(s) to open	选择要打开的文件
+Black (Checkered)	黑色（棋盘格）
+Cyan	青色
+Cyan (Checkered)	青色（棋盘格）
+Magenta	洋红
+Magenta (Checkered)	洋红（棋盘格）
+White	白色
+White (Checkered)	白色（棋盘格）
+Yellow	黄色
+Yellow (Checkered)	黄色（棋盘格）
+Browse For ACC Executable	浏览 ACC 可执行文件
+Browse for ACC Include Path	浏览 ACC 包含路径
+Browse for DeflOpt Executable	浏览 DeflOpt 可执行文件
+Browse For DoomTools Jar	浏览 DoomTools Jar
+Browse for External Editor	浏览外部编辑器
+Browse For Java Executable	浏览 Java 可执行文件
+Browse for MIDI Soundfont	浏览 MIDI 音色库
+Browse for Nodebuilder Executable	浏览节点构建器可执行文件
+Browse for PNGCrush Executable	浏览 PNGCrush 可执行文件
+Browse for PNGout Executable	浏览 PNGout 可执行文件
+Browse for Timidity Executable	浏览 Timidity 可执行文件
+Browse ZDoom PK3	浏览 ZDoom PK3
+Applies to Doom and Hexen format maps only, which are limited to a maximum of 65535 sides	仅适用于 Doom 与 Hexen 格式的地图，这类地图最多只支持 65535 个侧面
+When opening a directory, ignore any files or subdirectories beginning with a '.'	打开目录时，忽略以“.”开头的文件和子目录
+When opening a zip or directory, automatically open all wad entries in the root directory	打开 zip 或目录时，自动打开根目录中的所有 wad 条目
+Migrates the selection between edit modes, eg. switching from sectors to lines mode will select all lines of the previously selected sectors	在编辑模式之间迁移选择，例如从扇区模式切换到线段模式时，会选中之前所选扇区的所有线段
+On some displays the translation editor dialog can be too large to fit on the screen vertically. Enable this to reduce its vertical size.	在某些显示器上，转换编辑器对话框可能过高而无法完整显示。启用此项可减小其垂直尺寸。
+When enabled, any words matching the word at the current cursor position or selection will be highlighted	启用后，与光标所在单词或选中内容相同的单词都会高亮显示
+Show lines from an object with an action special to the tagged object(s) when highlighted	高亮时，显示带动作特殊值的物件指向被标记物件的连线
+If disabled, optional parameters will be shown between [] brackets	禁用时，可选参数将显示在 [] 方括号之间
+This can be left blank to use SLADE's internal soundfont that matches the default Windows MIDI sound	留空则使用 SLADE 内置的、与 Windows 默认 MIDI 音色一致的音色库
+Dark theme is only supported on Windows 10 20H1 or later	深色主题仅在 Windows 10 20H1 或更高版本中受支持
+Illuminant A, 10° Observer	光源 A，10° 观察者
+Illuminant A, 2° Observer	光源 A，2° 观察者
+Illuminant C, 10° Observer	光源 C，10° 观察者
+Illuminant C, 2° Observer	光源 C，2° 观察者
+Illuminant D50, 10° Observer	光源 D50，10° 观察者
+Illuminant D50, 2° Observer	光源 D50，2° 观察者
+Illuminant D60, 10° Observer	光源 D60，10° 观察者
+Illuminant D60, 2° Observer	光源 D60，2° 观察者
+Illuminant D65, 10° Observer	光源 D65，10° 观察者
+Illuminant D65, 2° Observer	光源 D65，2° 观察者
+Illuminant D75, 10° Observer	光源 D75，10° 观察者
+Illuminant D75, 2° Observer	光源 D75，2° 观察者
+Illuminant F2, 10° Observer	光源 F2，10° 观察者
+Illuminant F2, 2° Observer	光源 F2，2° 观察者
+Illuminant TL4, 10° Observer	光源 TL4，10° 观察者
+Illuminant TL4, 2° Observer	光源 TL4，2° 观察者
+Illuminant UL3000, 10° Observer	光源 UL3000，10° 观察者
+Illuminant UL3000, 2° Observer	光源 UL3000，2° 观察者

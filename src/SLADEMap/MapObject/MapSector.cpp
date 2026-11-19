@@ -1,0 +1,938 @@
+
+// -----------------------------------------------------------------------------
+// SLADE - It's a Doom Editor
+// Copyright(C) 2008 - 2026 Simon Judd
+//
+// Email:       sirjuddington@gmail.com
+// Web:         http://slade.mancubus.net
+// Filename:    MapSector.cpp
+// Description: MapSector class, represents a sector object in a map
+//
+// This program is free software; you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation; either version 2 of the License, or (at your option)
+// any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+// more details.
+//
+// You should have received a copy of the GNU General Public License along with
+// this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301, USA.
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+//
+// Includes
+//
+// -----------------------------------------------------------------------------
+#include "Main.h"
+#include "MapSector.h"
+#include "App.h"
+#include "Game/Configuration.h"
+#include "Geometry/Geometry.h"
+#include "MapLine.h"
+#include "MapSide.h"
+#include "MapVertex.h"
+#include "SLADEMap/MapObjectList/SectorList.h"
+#include "SLADEMap/SLADEMap.h"
+#include "Utility/Debuggable.h"
+#include "Utility/Parser.h"
+#include "Utility/Polygon.h"
+#include "Utility/StringUtils.h"
+#include <algorithm>
+
+using namespace slade;
+
+
+// -----------------------------------------------------------------------------
+//
+// MapSector Class Functions
+//
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+// MapSector class constructor
+// -----------------------------------------------------------------------------
+MapSector::MapSector(
+	int         f_height,
+	string_view f_tex,
+	int         c_height,
+	string_view c_tex,
+	short       light,
+	short       special,
+	short       id) :
+	MapObject(Type::Sector),
+	floor_{ f_tex, f_height, Plane::flat(f_height) },
+	ceiling_{ c_tex, c_height, Plane::flat(c_height) },
+	light_{ light },
+	special_{ special },
+	id_{ id },
+	renderinfo_updated_{ app::runTimer() }
+{
+}
+
+// -----------------------------------------------------------------------------
+// MapSector class constructor from UDMF definition
+// -----------------------------------------------------------------------------
+MapSector::MapSector(string_view f_tex, string_view c_tex, const ParseTreeNode* udmf_def) :
+	MapObject(Type::Sector),
+	floor_{ f_tex },
+	ceiling_{ c_tex }
+{
+	// Set UDMF defaults
+	light_ = 160;
+
+	// Set properties from UDMF definition
+	ParseTreeNode* prop;
+	for (unsigned a = 0; a < udmf_def->nChildren(); a++)
+	{
+		prop = udmf_def->childPTN(a);
+
+		// Skip required properties
+		if (prop->nameIsCI(PROP_TEXFLOOR) || prop->nameIsCI(PROP_TEXCEILING))
+			continue;
+
+		if (prop->nameIsCI(PROP_HEIGHTFLOOR))
+			setFloorHeight(prop->intValue());
+		else if (prop->nameIsCI(PROP_HEIGHTCEILING))
+			setCeilingHeight(prop->intValue());
+		else if (prop->nameIsCI(PROP_LIGHTLEVEL))
+			light_ = prop->intValue();
+		else if (prop->nameIsCI(PROP_SPECIAL))
+			special_ = prop->intValue();
+		else if (prop->nameIsCI(PROP_ID))
+			id_ = prop->intValue();
+		else
+			properties_[prop->name()] = prop->value();
+	}
+}
+
+// -----------------------------------------------------------------------------
+// MapSector class destructor
+// -----------------------------------------------------------------------------
+MapSector::~MapSector() = default;
+
+// -----------------------------------------------------------------------------
+// Copies another map object [s]
+// -----------------------------------------------------------------------------
+void MapSector::copy(MapObject* obj)
+{
+	// Don't copy a non-sector
+	if (obj->objType() != Type::Sector)
+		return;
+
+	// Update texture counts (decrement previous)
+	if (parent_map_)
+	{
+		parent_map_->sectors().updateTexUsage(floor_.texture, -1);
+		parent_map_->sectors().updateTexUsage(ceiling_.texture, -1);
+	}
+
+	// Basic variables
+	beginModify();
+	auto sector      = dynamic_cast<MapSector*>(obj);
+	floor_.texture   = sector->floor_.texture;
+	ceiling_.texture = sector->ceiling_.texture;
+	floor_.height    = sector->floor_.height;
+	ceiling_.height  = sector->ceiling_.height;
+	light_           = sector->light_;
+	special_         = sector->special_;
+	id_              = sector->id_;
+	floor_.plane.set(0, 0, 1, sector->floor_.height);
+	ceiling_.plane.set(0, 0, 1, sector->ceiling_.height);
+
+	// Update texture counts (increment new)
+	if (parent_map_)
+	{
+		parent_map_->sectors().updateTexUsage(floor_.texture, 1);
+		parent_map_->sectors().updateTexUsage(ceiling_.texture, 1);
+	}
+
+	// Other properties
+	MapObject::copy(obj);
+
+	endModify();
+}
+
+// -----------------------------------------------------------------------------
+// Update the last time the sector geometry changed
+// -----------------------------------------------------------------------------
+void MapSector::setRenderInfoUpdated() const
+{
+	renderinfo_updated_ = app::runTimer();
+	if (parent_map_)
+		parent_map_->setSectorRenderInfoUpdated();
+}
+
+// -----------------------------------------------------------------------------
+// Returns true if the sector has the specified [id]
+// (including UDMF moreids if applicable)
+// -----------------------------------------------------------------------------
+bool MapSector::hasId(int id) const
+{
+	if (id_ == id)
+		return true;
+
+	// Check moreids property (UDMF only)
+	if (parent_map_ && parent_map_->currentFormat() == MapFormat::UDMF && hasProp("moreids"))
+	{
+		auto moreids = stringProperty("moreids");
+		auto ids_vec = strutil::split(moreids, ' ');
+		for (const auto& extra_id : ids_vec)
+			if (strutil::asInt(extra_id) == id)
+				return true;
+	}
+
+	return false;
+}
+
+// -----------------------------------------------------------------------------
+// Returns the value of the string property matching [key]
+// -----------------------------------------------------------------------------
+string MapSector::stringProperty(string_view key) const
+{
+	if (key == PROP_TEXFLOOR)
+		return floor_.texture;
+	else if (key == PROP_TEXCEILING)
+		return ceiling_.texture;
+	else
+		return MapObject::stringProperty(key);
+}
+
+// -----------------------------------------------------------------------------
+// Returns the value of the integer property matching [key]
+// -----------------------------------------------------------------------------
+int MapSector::intProperty(string_view key) const
+{
+	if (key == PROP_HEIGHTFLOOR)
+		return floor_.height;
+	else if (key == PROP_HEIGHTCEILING)
+		return ceiling_.height;
+	else if (key == PROP_LIGHTLEVEL)
+		return light_;
+	else if (key == PROP_SPECIAL)
+		return special_;
+	else if (key == PROP_ID)
+		return id_;
+	else
+		return MapObject::intProperty(key);
+}
+
+// -----------------------------------------------------------------------------
+// Sets the string value of the property [key] to [value]
+// -----------------------------------------------------------------------------
+void MapSector::setStringProperty(string_view key, string_view value)
+{
+	if (key == PROP_TEXFLOOR)
+		setFloorTexture(value);
+	else if (key == PROP_TEXCEILING)
+		setCeilingTexture(value);
+	else
+		return MapObject::setStringProperty(key, value);
+}
+
+// -----------------------------------------------------------------------------
+// Sets the float value of the property [key] to [value]
+// -----------------------------------------------------------------------------
+void MapSector::setFloatProperty(string_view key, double value)
+{
+	using game::UDMFFeature;
+
+	//// Check if flat offset/scale/rotation is changing (if UDMF)
+	// if (parent_map_->currentFormat() == MapFormat::UDMF)
+	//{
+	//	if ((game::configuration().featureSupported(UDMFFeature::FlatPanning)
+	//		 && (key == "xpanningfloor" || key == "ypanningfloor"))
+	//		|| (game::configuration().featureSupported(UDMFFeature::FlatScaling)
+	//			&& (key == "xscalefloor" || key == "yscalefloor" || key == "xscaleceiling" || key == "yscaleceiling"))
+	//		|| (game::configuration().featureSupported(UDMFFeature::FlatRotation)
+	//			&& (key == "rotationfloor" || key == "rotationceiling")))
+	//		polygon_.setTexture(0); // Clear texture to force update
+	// }
+
+	MapObject::setFloatProperty(key, value);
+}
+
+// -----------------------------------------------------------------------------
+// Sets the integer value of the property [key] to [value]
+// -----------------------------------------------------------------------------
+void MapSector::setIntProperty(string_view key, int value)
+{
+	if (key == PROP_HEIGHTFLOOR)
+		setFloorHeight(value);
+	else if (key == PROP_HEIGHTCEILING)
+		setCeilingHeight(value);
+	else if (key == PROP_LIGHTLEVEL)
+		setLightLevel(value);
+	else if (key == PROP_SPECIAL)
+		setSpecial(value);
+	else if (key == PROP_ID)
+		setTag(value);
+	else
+		MapObject::setIntProperty(key, value);
+}
+
+// -----------------------------------------------------------------------------
+// Sets the floor texture to [tex]
+// -----------------------------------------------------------------------------
+void MapSector::setFloorTexture(string_view tex)
+{
+	beginModify();
+	if (parent_map_)
+		parent_map_->sectors().updateTexUsage(floor_.texture, -1);
+	floor_.texture = tex;
+	if (parent_map_)
+		parent_map_->sectors().updateTexUsage(floor_.texture, 1);
+	endModify();
+}
+
+// -----------------------------------------------------------------------------
+// Sets the ceiling texture to [tex]
+// -----------------------------------------------------------------------------
+void MapSector::setCeilingTexture(string_view tex)
+{
+	beginModify();
+	if (parent_map_)
+		parent_map_->sectors().updateTexUsage(ceiling_.texture, -1);
+	ceiling_.texture = tex;
+	if (parent_map_)
+		parent_map_->sectors().updateTexUsage(ceiling_.texture, 1);
+	endModify();
+}
+
+// -----------------------------------------------------------------------------
+// Sets the floor height to [height]
+// -----------------------------------------------------------------------------
+void MapSector::setFloorHeight(short height)
+{
+	beginModify();
+	floor_.height = height;
+	setFloorPlane(Plane::flat(height));
+	endModify();
+}
+
+// -----------------------------------------------------------------------------
+// Sets the ceiling height to [height]
+// -----------------------------------------------------------------------------
+void MapSector::setCeilingHeight(short height)
+{
+	beginModify();
+	ceiling_.height = height;
+	setCeilingPlane(Plane::flat(height));
+	endModify();
+}
+
+// -----------------------------------------------------------------------------
+// Sets the floor plane to [p]
+// -----------------------------------------------------------------------------
+void MapSector::setFloorPlane(const Plane& p)
+{
+	if (floor_.plane != p)
+		setRenderInfoUpdated();
+	floor_.plane = p;
+}
+
+// -----------------------------------------------------------------------------
+// Sets the ceiling plane to [p]
+// -----------------------------------------------------------------------------
+void MapSector::setCeilingPlane(const Plane& p)
+{
+	if (ceiling_.plane != p)
+		setRenderInfoUpdated();
+	ceiling_.plane = p;
+}
+
+// -----------------------------------------------------------------------------
+// Sets the [light] level
+// -----------------------------------------------------------------------------
+void MapSector::setLightLevel(int light)
+{
+	beginModify();
+	light_ = light;
+	endModify();
+}
+
+// -----------------------------------------------------------------------------
+// Sets the [special]
+// -----------------------------------------------------------------------------
+void MapSector::setSpecial(int special)
+{
+	beginModify();
+	special_ = special;
+	endModify();
+}
+
+// -----------------------------------------------------------------------------
+// Sets the [tag]
+// -----------------------------------------------------------------------------
+void MapSector::setTag(int tag)
+{
+	beginModify();
+	id_ = tag;
+	endModify();
+}
+
+// -----------------------------------------------------------------------------
+// Returns true if the ceiling has a slope
+// -----------------------------------------------------------------------------
+bool MapSector::ceilingHasSlope() const
+{
+	return ceiling_.plane.a != 0 || ceiling_.plane.b != 0 || ceiling_.plane.c != 1;
+}
+
+// -----------------------------------------------------------------------------
+// Returns true if the floor has a slope
+// -----------------------------------------------------------------------------
+bool MapSector::floorHasSlope() const
+{
+	return floor_.plane.a != 0 || floor_.plane.b != 0 || floor_.plane.c != 1;
+}
+
+// -----------------------------------------------------------------------------
+// Returns the object point [point]:
+// Mid = the absolute mid point of the sector,
+// Within/Text = a calculated point that is within the actual sector
+// -----------------------------------------------------------------------------
+Vec2d MapSector::getPoint(Point point) const
+{
+	if (point == Point::Mid)
+	{
+		auto bbox = boundingBox();
+		return { bbox.min.x + ((bbox.max.x - bbox.min.x) * 0.5), bbox.min.y + ((bbox.max.y - bbox.min.y) * 0.5) };
+	}
+	else
+	{
+		if (text_point_.x == 0 && text_point_.y == 0 && parent_map_)
+			findTextPoint();
+		return text_point_;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Calculates the sector's bounding box
+// -----------------------------------------------------------------------------
+void MapSector::updateBBox() const
+{
+	// Reset bounding box
+	bbox_.reset();
+
+	for (auto& connected_side : connected_sides_)
+	{
+		auto line = connected_side->parentLine();
+		if (!line)
+			continue;
+		bbox_.extend(line->v1()->xPos(), line->v1()->yPos());
+		bbox_.extend(line->v2()->xPos(), line->v2()->yPos());
+	}
+
+	text_point_ = { 0, 0 };
+	setRenderInfoUpdated();
+}
+
+// -----------------------------------------------------------------------------
+// Returns the sector bounding box
+// -----------------------------------------------------------------------------
+BBox MapSector::boundingBox() const
+{
+	// Update bbox if needed
+	if (!bbox_.isValid())
+		updateBBox();
+
+	return bbox_;
+}
+
+// -----------------------------------------------------------------------------
+// Returns the sector polygon vertices (as triangles), updating if necessary
+// -----------------------------------------------------------------------------
+const vector<glm::vec2>& MapSector::polygonVertices() const
+{
+	if (poly_needsupdate_)
+	{
+		polygon_triangles_ = polygon::generateSectorTriangles(*this);
+		poly_needsupdate_  = false;
+	}
+
+	return polygon_triangles_;
+}
+
+// -----------------------------------------------------------------------------
+// Returns true if the given [point] is inside the sector
+// -----------------------------------------------------------------------------
+bool MapSector::containsPoint(const Vec2d& point) const
+{
+	// Check with bbox first
+	if (!boundingBox().contains(point))
+		return false;
+
+	// Find nearest line in the sector
+	double   dist;
+	double   min_dist = 999999;
+	MapLine* nline    = nullptr;
+	for (auto& connected_side : connected_sides_)
+	{
+		// Calculate distance to line
+		dist = connected_side->parentLine()->distanceTo(point);
+
+		// Check distance
+		if (dist < min_dist)
+		{
+			nline    = connected_side->parentLine();
+			min_dist = dist;
+		}
+	}
+
+	// No nearest (shouldn't happen)
+	if (!nline)
+		return false;
+
+	// Check the side of the nearest line
+	double side = geometry::lineSide(point, nline->seg());
+	if (side >= 0 && nline->frontSector() == this)
+		return true;
+	else if (side < 0 && nline->backSector() == this)
+		return true;
+	else
+		return false;
+}
+
+// -----------------------------------------------------------------------------
+// Returns the minimum distance from the point to the closest line in the sector
+// -----------------------------------------------------------------------------
+double MapSector::distanceTo(const Vec2d& point, double maxdist) const
+{
+	// Init
+	if (maxdist < 0)
+		maxdist = 9999999;
+
+	// Check bounding box first
+	if (!bbox_.isValid())
+		updateBBox();
+	double min_dist = 9999999;
+	double dist     = geometry::distanceToLine(point, bbox_.leftSide());
+	min_dist        = std::min(dist, min_dist);
+	dist            = geometry::distanceToLine(point, bbox_.topSide());
+	min_dist        = std::min(dist, min_dist);
+	dist            = geometry::distanceToLine(point, bbox_.rightSide());
+	min_dist        = std::min(dist, min_dist);
+	dist            = geometry::distanceToLine(point, bbox_.bottomSide());
+	min_dist        = std::min(dist, min_dist);
+
+	if (min_dist > maxdist && !bbox_.contains(point))
+		return -1;
+
+	// Go through connected sides
+	for (auto& connected_side : connected_sides_)
+	{
+		// Get side parent line
+		auto line = connected_side->parentLine();
+		if (!line)
+			continue;
+
+		// Check distance
+		dist     = line->distanceTo(point);
+		min_dist = std::min(dist, min_dist);
+	}
+
+	return min_dist;
+}
+
+// -----------------------------------------------------------------------------
+// Adds all lines that are part of the sector to [list]
+// -----------------------------------------------------------------------------
+bool MapSector::putLines(vector<MapLine*>& list) const
+{
+	// Go through connected sides
+	for (auto& connected_side : connected_sides_)
+	{
+		// Add the side's parent line to the list if it doesn't already exist
+		if (std::ranges::find(list, connected_side->parentLine()) == list.end())
+			list.push_back(connected_side->parentLine());
+	}
+
+	return true;
+}
+
+// -----------------------------------------------------------------------------
+// Adds all vertices that are part of the sector to [list]
+// -----------------------------------------------------------------------------
+bool MapSector::putVertices(vector<MapVertex*>& list) const
+{
+	for (auto& connected_side : connected_sides_)
+	{
+		auto line = connected_side->parentLine();
+
+		// Add the side's parent line's vertices to the list if they doesn't already exist
+		if (line->v1() && std::ranges::find(list, line->v1()) == list.end())
+			list.push_back(line->v1());
+		if (line->v2() && std::ranges::find(list, line->v2()) == list.end())
+			list.push_back(line->v2());
+	}
+
+	return true;
+}
+
+// -----------------------------------------------------------------------------
+// Adds all vertices that are part of the sector to [list]
+// -----------------------------------------------------------------------------
+bool MapSector::putVertices(vector<MapObject*>& list) const
+{
+	for (auto& connected_side : connected_sides_)
+	{
+		auto line = connected_side->parentLine();
+
+		// Add the side's parent line's vertices to the list if they doesn't already exist
+		if (line->v1() && std::ranges::find(list, line->v1()) == list.end())
+			list.push_back(line->v1());
+		if (line->v2() && std::ranges::find(list, line->v2()) == list.end())
+			list.push_back(line->v2());
+	}
+
+	return true;
+}
+
+// -----------------------------------------------------------------------------
+// Returns the light level of the sector at [where]
+// -----------------------------------------------------------------------------
+uint8_t MapSector::lightAt(SectorPart where) const
+{
+	int light = light_;
+
+	// Check for UDMF + flat lighting
+	if (parent_map_ && parent_map_->currentFormat() == MapFormat::UDMF)
+	{
+		// Apply flat lighting (if supported and specified)
+		if (game::configuration().featureSupported(game::UDMFFeature::FlatLighting))
+		{
+			// Floor
+			if (where == SectorPart::Floor && hasProp("lightfloor"))
+			{
+				int fl = intProperty("lightfloor");
+				if (boolProperty("lightfloorabsolute"))
+					light = fl;
+				else
+					light += fl;
+			}
+			// Ceiling
+			else if (where == SectorPart::Ceiling && hasProp("lightceiling"))
+			{
+				int cl = intProperty("lightceiling");
+				if (boolProperty("lightceilingabsolute"))
+					light = cl;
+				else
+					light += cl;
+			}
+		}
+	}
+
+	// Clamp light level
+	return std::clamp<int>(light, 0, 255);
+}
+
+// -----------------------------------------------------------------------------
+// Changes the sector light level by [amount]
+// -----------------------------------------------------------------------------
+void MapSector::changeLight(int amount, SectorPart where)
+{
+	// Get current light level
+	int ll = lightAt(where);
+
+	// Clamp amount
+	if (ll + amount > 255)
+		amount -= ((ll + amount) - 255);
+	else if (ll + amount < 0)
+		amount = -ll;
+
+	// Check for UDMF + flat lighting independent from the sector
+	bool separate = parent_map_
+					&& parent_map_->currentFormat() == MapFormat::UDMF
+					&& game::configuration().featureSupported(game::UDMFFeature::FlatLighting);
+
+	// Change light level by amount
+	if (where == SectorPart::Floor && separate)
+	{
+		int cur = intProperty("lightfloor");
+		setIntProperty("lightfloor", cur + amount);
+	}
+	else if (where == SectorPart::Ceiling && separate)
+	{
+		int cur = intProperty("lightceiling");
+		setIntProperty("lightceiling", cur + amount);
+	}
+	else
+		setLightLevel(ll + amount);
+}
+
+// -----------------------------------------------------------------------------
+// Returns the fog colour of the sector
+// -----------------------------------------------------------------------------
+// TODO: Move out to MapSpecials
+ColRGBA MapSector::fogColour() const
+{
+	ColRGBA color(0, 0, 0, 0);
+
+	// Map specials/scripts
+	/*if (parent_map_->mapSpecials()->tagFadeColoursSet())
+	{
+		if (parent_map_->mapSpecials()->tagFadeColour(id_, &color))
+			return color;
+	}*/
+
+	// UDMF
+	if (parent_map_
+		&& parent_map_->currentFormat() == MapFormat::UDMF
+		&& game::configuration().featureSupported(game::UDMFFeature::SectorFog))
+	{
+		int intcol = MapObject::intProperty("fadecolor");
+
+		wxColour wxcol(intcol);
+		color = ColRGBA(wxcol.Blue(), wxcol.Green(), wxcol.Red(), 0);
+	}
+	return color;
+}
+
+// -----------------------------------------------------------------------------
+// Finds the 'text point' for the sector. This is a point within the sector that
+// is reasonably close to the middle of the sector bbox while still being within
+// the sector itself
+// -----------------------------------------------------------------------------
+void MapSector::findTextPoint() const
+{
+	// Check if actual sector midpoint can be used
+	text_point_ = getPoint(Point::Mid);
+	if (containsPoint(text_point_))
+		return;
+
+	if (connected_sides_.empty())
+		return;
+
+	// Find nearest line to sector midpoint (that is also part of the sector)
+	double   min_dist        = 9999999999.0;
+	auto     mid_side        = connected_sides_[0];
+	MapLine* mid_side_parent = mid_side->parentLine();
+	for (auto& connected_side : connected_sides_)
+	{
+		auto   l    = connected_side->parentLine();
+		double dist = geometry::distanceToLineFast(text_point_, l->seg());
+
+		if (dist < min_dist)
+		{
+			min_dist        = dist;
+			mid_side        = connected_side;
+			mid_side_parent = l;
+		}
+	}
+
+	// Calculate ray
+	auto r_o = mid_side_parent->getPoint(Point::Mid);
+	auto r_d = mid_side_parent->frontVector();
+	if (mid_side == mid_side_parent->s1())
+		r_d = { -r_d.x, -r_d.y };
+
+	// Find nearest intersecting line
+	min_dist = 9999999999.0;
+	for (auto& connected_side : connected_sides_)
+	{
+		if (connected_side == mid_side)
+			continue;
+
+		auto   line = connected_side->parentLine();
+		double dist = geometry::distanceRayLine(r_o, r_o + r_d, line->start(), line->end());
+
+		if (dist > 0 && dist < min_dist)
+			min_dist = dist;
+	}
+
+	// Set text point to halfway between the two lines
+	text_point_ = { r_o.x + (r_d.x * min_dist * 0.5), r_o.y + (r_d.y * min_dist * 0.5) };
+}
+
+// -----------------------------------------------------------------------------
+// Resets the sector geometry info (bounding box, polygon vertices, etc.)
+// -----------------------------------------------------------------------------
+void MapSector::resetGeometryInfo() const
+{
+	poly_needsupdate_ = true;
+	bbox_.reset();
+	setRenderInfoUpdated();
+}
+
+// -----------------------------------------------------------------------------
+// Adds [side] to the list of 'connected sides'
+// (sides that are part of this sector)
+// -----------------------------------------------------------------------------
+void MapSector::connectSide(MapSide* side)
+{
+	connected_sides_.push_back(side);
+	resetGeometryInfo();
+}
+
+// -----------------------------------------------------------------------------
+// Removes [side] from the list of connected sides
+// -----------------------------------------------------------------------------
+void MapSector::disconnectSide(const MapSide* side)
+{
+	for (unsigned a = 0; a < connected_sides_.size(); a++)
+	{
+		if (connected_sides_[a] == side)
+		{
+			connected_sides_.erase(connected_sides_.begin() + a);
+			break;
+		}
+	}
+
+	resetGeometryInfo();
+}
+
+// -----------------------------------------------------------------------------
+// Write all sector info to a Backup struct
+// -----------------------------------------------------------------------------
+void MapSector::writeBackup(Backup* backup)
+{
+	backup->props_internal[PROP_TEXFLOOR]      = floor_.texture;
+	backup->props_internal[PROP_TEXCEILING]    = ceiling_.texture;
+	backup->props_internal[PROP_HEIGHTFLOOR]   = floor_.height;
+	backup->props_internal[PROP_HEIGHTCEILING] = ceiling_.height;
+	backup->props_internal[PROP_LIGHTLEVEL]    = light_;
+	backup->props_internal[PROP_SPECIAL]       = special_;
+	backup->props_internal[PROP_ID]            = id_;
+}
+
+// -----------------------------------------------------------------------------
+// Reads all sector info from a Backup struct
+// -----------------------------------------------------------------------------
+void MapSector::readBackup(Backup* backup)
+{
+	// Update texture counts (decrement previous)
+	parent_map_->sectors().updateTexUsage(floor_.texture, -1);
+	parent_map_->sectors().updateTexUsage(ceiling_.texture, -1);
+
+	floor_.texture   = backup->props_internal.get<string>(PROP_TEXFLOOR);
+	ceiling_.texture = backup->props_internal.get<string>(PROP_TEXCEILING);
+	floor_.height    = backup->props_internal.get<int>(PROP_HEIGHTFLOOR);
+	ceiling_.height  = backup->props_internal.get<int>(PROP_HEIGHTCEILING);
+	floor_.plane.set(0, 0, 1, floor_.height);
+	ceiling_.plane.set(0, 0, 1, ceiling_.height);
+	light_   = backup->props_internal.get<int>(PROP_LIGHTLEVEL);
+	special_ = backup->props_internal.get<int>(PROP_SPECIAL);
+	id_      = backup->props_internal.get<int>(PROP_ID);
+
+	// Update texture counts (increment new)
+	parent_map_->sectors().updateTexUsage(floor_.texture, 1);
+	parent_map_->sectors().updateTexUsage(ceiling_.texture, 1);
+
+	// Update geometry info
+	resetGeometryInfo();
+}
+
+// -----------------------------------------------------------------------------
+// Writes the sector as a UDMF text definition to [def]
+// -----------------------------------------------------------------------------
+void MapSector::writeUDMF(string& def)
+{
+	def = fmt::format("sector//#{}\n{{\n", index_);
+
+	// Basic properties
+	def += fmt::format("texturefloor=\"{}\";\ntextureceiling=\"{}\";\n", floor_.texture, ceiling_.texture);
+	if (floor_.height != 0)
+		def += fmt::format("heightfloor={};\n", floor_.height);
+	if (ceiling_.height != 0)
+		def += fmt::format("heightceiling={};\n", ceiling_.height);
+	if (light_ != 160)
+		def += fmt::format("lightlevel={};\n", light_);
+	if (special_ != 0)
+		def += fmt::format("special={};\n", special_);
+	if (id_ != 0)
+		def += fmt::format("id={};\n", id_);
+
+	// For UDMF sector planes, ALL values must be added, or else GZDoom
+	// will consider them invalid.
+	// Check for UDMF floor planes, and if they are present, copy the
+	// values from the existing floor planes, and remove the floor plane
+	// properties so that they can be put in order.
+	double floor_a = 0, floor_b = 0, floor_c = 0, floor_d = 0;
+	bool   hasFloorPlane =
+		(hasProp("floorplane_a") || hasProp("floorplane_b") || hasProp("floorplane_c") || hasProp("floorplane_d"));
+	if (hasFloorPlane)
+	{
+		// The ABC values are internally negated to compensate for the
+		// differences in the point height calculations between SLADE and
+		// GZDoom
+		floor_a = -floor_.plane.a;
+		floor_b = -floor_.plane.b;
+		floor_c = -floor_.plane.c;
+		floor_d = floor_.plane.d;
+		// Write the floor/ceiling plane properties in order later
+		properties_.remove("floorplane_a");
+		properties_.remove("floorplane_b");
+		properties_.remove("floorplane_c");
+		properties_.remove("floorplane_d");
+	}
+	// Do the same for the ceiling plane
+	double ceiling_a = 0, ceiling_b = 0, ceiling_c = 0, ceiling_d = 0;
+	bool   hasCeilingPlane =
+		(hasProp("ceilingplane_a")
+		 || hasProp("ceilingplane_b")
+		 || hasProp("ceilingplane_c")
+		 || hasProp("ceilingplane_d"));
+	if (hasCeilingPlane)
+	{
+		ceiling_a = -ceiling_.plane.a;
+		ceiling_b = -ceiling_.plane.b;
+		ceiling_c = -ceiling_.plane.c;
+		ceiling_d = ceiling_.plane.d;
+		properties_.remove("ceilingplane_a");
+		properties_.remove("ceilingplane_b");
+		properties_.remove("ceilingplane_c");
+		properties_.remove("ceilingplane_d");
+	}
+
+	// Other properties (that are not related to floor/ceiling planes
+	if (!properties_.empty())
+		def += properties_.toString(true, 3);
+
+	// Write the floor and ceiling plane values in order
+	if (hasFloorPlane)
+	{
+		def += fmt::format("floorplane_a = {};", floor_a);
+		def += fmt::format("floorplane_b = {};", floor_b);
+		def += fmt::format("floorplane_c = {};", floor_c);
+		def += fmt::format("floorplane_d = {};", floor_d);
+		// Persist between multiple saves
+		properties_["floorplane_a"] = floor_a;
+		properties_["floorplane_b"] = floor_b;
+		properties_["floorplane_c"] = floor_c;
+		properties_["floorplane_d"] = floor_d;
+	}
+	if (hasCeilingPlane)
+	{
+		def += fmt::format("ceilingplane_a = {};", ceiling_a);
+		def += fmt::format("ceilingplane_b = {};", ceiling_b);
+		def += fmt::format("ceilingplane_c = {};", ceiling_c);
+		def += fmt::format("ceilingplane_d = {};", ceiling_d);
+		// Persist between multiple saves
+		properties_["ceilingplane_a"] = ceiling_a;
+		properties_["ceilingplane_b"] = ceiling_b;
+		properties_["ceilingplane_c"] = ceiling_c;
+		properties_["ceilingplane_d"] = ceiling_d;
+	}
+
+	def += "}\n\n";
+}
+
+#ifndef NDEBUG
+// -----------------------------------------------------------------------------
+// Debuggable operator
+// -----------------------------------------------------------------------------
+MapSector::operator Debuggable() const
+{
+	if (!this)
+		return { "<sector NULL>" };
+
+	return { fmt::format("<sector {}>", index_) };
+}
+#endif
